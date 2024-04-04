@@ -160,6 +160,52 @@
         that:
           - result.changed == false
 
+    - name: Add retain_package_versions to 3 in repository
+      pulp.squeezer.rpm_repository:
+        name: test_rpm_repository
+        retain_package_versions: 3
+        state: present
+      register: result
+    - name: Verify add retain_package_versions is 3 in repository
+      assert:
+        that:
+          - result.changed == true
+          - result.repository.retain_package_versions == 3
+
+    - name: Add retain_package_versions to 3 in repository (2nd try)
+      pulp.squeezer.rpm_repository:
+        name: test_rpm_repository
+        retain_package_versions: 3
+        state: present
+      register: result
+    - name: Verify add retain_package_versions is 3 in repository (2nd try)
+      assert:
+        that:
+          - result.changed == false
+
+    - name: Remove retain_package_versions to 3 from repository
+      pulp.squeezer.rpm_repository:
+        name: test_rpm_repository
+        retain_package_versions: 0
+        state: present
+      register: result
+    - name: Verify remove retain_package_versions to 3 from repository
+      assert:
+        that:
+          - result.changed == true
+          - result.repository.retain_package_versions == 0
+
+    - name: Remove retain_package_versions to 3 from repository (2nd try)
+      pulp.squeezer.rpm_repository:
+        name: test_rpm_repository
+        retain_package_versions: 0
+        state: present
+      register: result
+    - name: Verify remove retain_package_versions to 3 from repository (2nd try)
+      assert:
+        that:
+          - result.changed == false
+
     - name: Fake modify repository
       pulp.squeezer.rpm_repository:
         name: test_rpm_repository
