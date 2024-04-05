@@ -41,6 +41,11 @@ options:
       - A JSON document or data structure describing a config.repo file
     type: raw
     version_added: "0.0.16"
+  retain_package_versions:
+    description:
+      - Max number of latest versions of each package to keep (optional)
+    type: int
+    version_added: "0.0.16"
 extends_documentation_fragment:
   - pulp.squeezer.pulp
   - pulp.squeezer.pulp.entity_state
@@ -69,6 +74,7 @@ EXAMPLES = r"""
     description: A brand new repository with a description
     autopublish: true
     remote: existing_remote
+    retain_package_versions: 3
     repo_config:
       gpgcheck: 1
     state: present
@@ -102,7 +108,7 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
     PulpRpmRepository,
 )
 
-DESIRED_KEYS = {"autopublish", "remote", "repo_config"}
+DESIRED_KEYS = {"autopublish", "remote", "repo_config", "retain_package_versions"}
 
 
 def main():
@@ -113,6 +119,7 @@ def main():
             autopublish=dict(type="bool"),
             remote=dict(),
             repo_config=dict(type="raw"),
+            retain_package_versions=dict(type="int"),
         ),
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
