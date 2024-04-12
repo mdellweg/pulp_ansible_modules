@@ -36,6 +36,20 @@ options:
     required: false
     default: "additive"
     choices: ["additive", "mirror_complete", "mirror_content_only"]
+  skip_types:
+    description:
+      - List of content types to skip during sync.
+    type: list
+    required: false
+    default: "[]"
+    choices: ["srpm", "treeinfo"]
+  optimize:
+    description:
+      - Whether or not to optimize sync.
+    type: bool
+    required: false
+    default: "True"
+
 extends_documentation_fragment:
   - pulp.squeezer.pulp
 author:
@@ -83,6 +97,15 @@ def main():
                 default="additive",
                 choices=["additive", "mirror_complete", "mirror_content_only"],
             ),
+            skip_types=dict(
+                type="list",
+                default=[],
+                choices=["srpm", "treeinfo"],
+            ),
+            optimize=dict(
+                type="bool",
+                default=True
+            ),
         ),
     ) as module:
         remote = PulpRpmRemote(module, {"name": module.params["remote"]})
@@ -105,6 +128,18 @@ def main():
         else:
             mirror = module.params["sync_policy"] == "mirror_complete"
             parameters = {"mirror": mirror}
+
+        parameters = {"optimize": module.params['optimize']}
+
+        parameters.update(
+            {
+                key: module.params[key] or None
+                for key in [
+                    "skip_types",
+                ]
+                if module.params[key] is not None
+            }
+        )
 
         repository.process_sync(remote, parameters)
 
