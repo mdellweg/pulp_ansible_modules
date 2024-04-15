@@ -27,6 +27,8 @@ options:
       - Name of the repository
     type: str
     required: true
+  timeout:
+    default: 3600
 extends_documentation_fragment:
   - pulp.squeezer.pulp.glue
   - pulp.squeezer.pulp
@@ -80,6 +82,7 @@ def main():
         argument_spec=dict(
             remote=dict(required=False),
             repository=dict(required=True),
+            timeout=dict(type="int", default=3600),
         ),
     ) as module:
         repository_ctx = PulpContainerRepositoryContext(
