@@ -16,7 +16,7 @@ interactions:
     uri: http://pulp.example.org/pulp/api/v3/remotes/rpm/rpm/?limit=1&name=test_rpm_remote
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/rpm/rpm/018eaac8-0cd7-7085-8c47-cc7a8e54e61f/","pulp_created":"2024-04-04T20:23:41.016518Z","pulp_last_updated":"2024-04-04T20:23:41.016539Z","name":"test_rpm_remote","url":"https://fixtures.pulpproject.org/rpm-signed/","ca_cert":null,"client_cert":null,"tls_validation":true,"proxy_url":null,"pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"immediate","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":false},{"name":"proxy_username","is_set":false},{"name":"proxy_password","is_set":false},{"name":"username","is_set":false},{"name":"password","is_set":false}],"sles_auth_token":null}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/rpm/rpm/018f8307-f364-772e-99d8-d7d98185a9d4/","pulp_created":"2024-05-16T20:11:27.461460Z","pulp_last_updated":"2024-05-16T20:11:27.461481Z","name":"test_rpm_remote","url":"https://fixtures.pulpproject.org/rpm-signed/","ca_cert":null,"client_cert":null,"tls_validation":true,"proxy_url":null,"pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"immediate","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":false},{"name":"proxy_username","is_set":false},{"name":"proxy_password","is_set":false},{"name":"username","is_set":false},{"name":"password","is_set":false}],"sles_auth_token":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 8cd179487da8444da39fb0f94ada5bae
+      - 7b1b119c608443cba4646afb0848dc30
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Thu, 04 Apr 2024 20:23:50 GMT
+      - Thu, 16 May 2024 20:11:36 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -77,11 +77,11 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 09755bf03dd84afaaaa3f81cad8f50f4
+      - ed58d2c33bdb4d5fb2ad0ee292f6f924
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Thu, 04 Apr 2024 20:23:50 GMT
+      - Thu, 16 May 2024 20:11:37 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -96,7 +96,7 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{"name": "test_rpm_repository", "remote": "/pulp/api/v3/remotes/rpm/rpm/018eaac8-0cd7-7085-8c47-cc7a8e54e61f/",
+    body: '{"name": "test_rpm_repository", "remote": "/pulp/api/v3/remotes/rpm/rpm/018f8307-f364-772e-99d8-d7d98185a9d4/",
       "description": null}'
     headers:
       Accept:
@@ -115,7 +115,7 @@ interactions:
     uri: http://pulp.example.org/pulp/api/v3/repositories/rpm/rpm/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/repositories/rpm/rpm/018eaac8-35a5-7499-89ea-29e8cd1913c7/","pulp_created":"2024-04-04T20:23:51.463770Z","pulp_last_updated":"2024-04-04T20:23:51.474134Z","versions_href":"/pulp/api/v3/repositories/rpm/rpm/018eaac8-35a5-7499-89ea-29e8cd1913c7/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/rpm/rpm/018eaac8-35a5-7499-89ea-29e8cd1913c7/versions/0/","name":"test_rpm_repository","description":null,"retain_repo_versions":null,"remote":"/pulp/api/v3/remotes/rpm/rpm/018eaac8-0cd7-7085-8c47-cc7a8e54e61f/","autopublish":false,"metadata_signing_service":null,"retain_package_versions":0,"checksum_type":null,"metadata_checksum_type":null,"package_checksum_type":null,"gpgcheck":null,"repo_gpgcheck":null,"sqlite_metadata":false,"repo_config":{},"compression_type":null}'
+      string: '{"pulp_href":"/pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/","pulp_created":"2024-05-16T20:11:38.120669Z","pulp_last_updated":"2024-05-16T20:11:38.134173Z","versions_href":"/pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/versions/0/","name":"test_rpm_repository","description":null,"retain_repo_versions":null,"remote":"/pulp/api/v3/remotes/rpm/rpm/018f8307-f364-772e-99d8-d7d98185a9d4/","autopublish":false,"metadata_signing_service":null,"retain_package_versions":0,"checksum_type":null,"metadata_checksum_type":null,"package_checksum_type":null,"gpgcheck":null,"repo_gpgcheck":null,"sqlite_metadata":false,"repo_config":{},"compression_type":null}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -128,13 +128,13 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - b19c1b1c93a349c9ac77b248e61f73d9
+      - 21101262aee14f4db76efada70c4a5e8
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Thu, 04 Apr 2024 20:23:51 GMT
+      - Thu, 16 May 2024 20:11:38 GMT
       Location:
-      - /pulp/api/v3/repositories/rpm/rpm/018eaac8-35a5-7499-89ea-29e8cd1913c7/
+      - /pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/
       Referrer-Policy:
       - same-origin
       Server:

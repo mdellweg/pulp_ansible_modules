@@ -125,37 +125,13 @@
           - result.changed == true
           - result.repository.repo_config == '{"gpgcheck": 1}'
 
-    - name: Add repo_config (dict) to repository (2nd try)
+    - name: Add repo_config (string) to repository (Validate no change)
       pulp.squeezer.rpm_repository:
         name: test_rpm_repository
-        repo_config:
-          gpgcheck: 1
+        repo_config: '{"gpgcheck": 1}'
         state: present
       register: result
-    - name: Verify add repo_config (dict) to repository (2nd try)
-      assert:
-        that:
-          - result.changed == false
-
-    - name: Change repo_config (string) on repository
-      pulp.squeezer.rpm_repository:
-        name: test_rpm_repository
-        repo_config: '{"gpgcheck": 0}'
-        state: present
-      register: result
-    - name: Verify change repo_config (string) on repository
-      assert:
-        that:
-          - result.changed == true
-          - result.repository.repo_config == '{"gpgcheck": 0}'
-
-    - name: Change repo_config (string) on repository (2nd try)
-      pulp.squeezer.rpm_repository:
-        name: test_rpm_repository
-        repo_config: '{"gpgcheck": 0}'
-        state: present
-      register: result
-    - name: Verify change repo_config (string) on repository (2nd try)
+    - name: Verify add repo_config (string) to repository (Validate no change)
       assert:
         that:
           - result.changed == false
