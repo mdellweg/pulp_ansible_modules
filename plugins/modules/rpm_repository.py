@@ -137,10 +137,11 @@ def main():
             remote.find(failsafe=False)
             desired_attributes["remote"] = remote.href
 
-        repo_config = module.params["repo_config"]
         # Encode the repo_config unless its a string, then assume it is pre-formatted JSON
-        if repo_config is not None and not isinstance(repo_config, string_types):
-            desired_attributes["repo_config"] = json.dumps(repo_config)
+        if "repo_config" in desired_attributes and isinstance(
+            desired_attributes["repo_config"], string_types
+        ):
+            desired_attributes["repo_config"] = json.loads(desired_attributes["repo_config"])
 
         PulpRpmRepository(module, natural_key, desired_attributes).process()
 
