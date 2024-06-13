@@ -43,6 +43,11 @@ options:
       - Or the empty string to remove the remote
     type: str
     required: false
+  repository:
+    description:
+      - Name of the repository of which the latest RepositoryVersion will be served
+    type: str
+    required: false
 extends_documentation_fragment:
   - pulp.squeezer.pulp.entity_state
   - pulp.squeezer.pulp.glue
@@ -71,6 +76,16 @@ EXAMPLES = r"""
     name: new_python_distribution
     base_path: new/python/dist
     publication: /pub/api/v3/publications/python/python/aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa/
+    state: present
+
+- name: Create a python distribution that serves the latest repository version
+  pulp.squeezer.python_distribution:
+    pulp_url: https://pulp.example.org
+    username: admin
+    password: password
+    name: new_python_distribution
+    base_path: new/python/dist
+    repository: my_python_repository
     state: present
 
 - name: Create a python destribution with remote for pull-through caching
@@ -110,7 +125,11 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import Pul
 
 try:
     from pulp_glue.core.context import PulpContentGuardContext
-    from pulp_glue.python.context import PulpPythonDistributionContext, PulpPythonRemoteContext
+    from pulp_glue.python.context import (
+        PulpPythonDistributionContext,
+        PulpPythonRemoteContext,
+        PulpPythonRepositoryContext,
+    )
 
     # Fix this in pulp-glue
     if "content_guard" not in PulpPythonDistributionContext.NULLABLES:
@@ -136,6 +155,7 @@ def main():
             publication=dict(),
             content_guard=dict(),
             remote=dict(),
+            repository=dict(),
         ),
         required_if=[
             ("state", "present", ["name", "base_path"]),
@@ -144,6 +164,7 @@ def main():
     ) as module:
         content_guard_name = module.params["content_guard"]
         remote_name = module.params["remote"]
+        repository_name = module.params["repository"]
 
         natural_key = {
             "name": module.params["name"],
@@ -169,6 +190,15 @@ def main():
                 desired_attributes["remote"] = remote_ctx.pulp_href
             else:
                 desired_attributes["remote"] = ""
+
+        if repository_name is not None:
+            if repository_name:
+                repository_ctx = PulpPythonRepositoryContext(
+                    module.pulp_ctx, entity={"name": repository_name}
+                )
+                desired_attributes["repository"] = repository_ctx.pulp_href
+            else:
+                desired_attributes["repository"] = ""
 
         module.process(natural_key, desired_attributes)
 

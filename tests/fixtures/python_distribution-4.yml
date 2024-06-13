@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/?name=test_python_distribution&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/python/pypi/3a237389-4a15-4f98-956d-3001637d4074/","pulp_created":"2023-05-22T15:31:05.517216Z","base_path":"test_python_base_path","base_url":"https://5a298c727327/pypi/test_python_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/cd14f05e-77b5-4b5c-a4c8-fc8046c39b0f/","pulp_labels":{},"name":"test_python_distribution","repository":null,"publication":"/pulp/api/v3/publications/python/pypi/b2ad85ed-de7b-4a64-8167-721569935875/","allow_uploads":true,"remote":null}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/python/pypi/01907ca5-ec85-7b52-b0d4-c79980471090/","pulp_created":"2024-07-04T07:29:27.174473Z","pulp_last_updated":"2024-07-04T07:29:27.174482Z","base_path":"test_python_base_path","base_url":"https://3659543407e4/pypi/test_python_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/01907ca5-dba5-7cf6-9395-099547aecec0/","hidden":false,"pulp_labels":{},"name":"test_python_distribution","repository":null,"publication":"/pulp/api/v3/publications/python/pypi/01907ca5-d8ad-79a6-a39e-ec84001e8196/","allow_uploads":true,"remote":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,17 +23,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '581'
+      - '646'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:08 GMT
+      - Thu, 04 Jul 2024 07:29:29 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
@@ -57,14 +59,14 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: PATCH
-    uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/3a237389-4a15-4f98-956d-3001637d4074/
+    uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/01907ca5-ec85-7b52-b0d4-c79980471090/
   response:
     body:
-      string: '{"task":"/pulp/api/v3/tasks/ce8ad456-fd23-468f-81c8-d4b225ae9ea3/"}'
+      string: '{"task":"/pulp/api/v3/tasks/01907ca5-f60b-70ea-96d2-802b2899eadf/"}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -77,13 +79,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:08 GMT
+      - Thu, 04 Jul 2024 07:29:29 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
@@ -103,14 +107,14 @@ interactions:
       Connection:
       - keep-alive
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/tasks/ce8ad456-fd23-468f-81c8-d4b225ae9ea3/
+    uri: http://pulp.example.org/pulp/api/v3/tasks/01907ca5-f60b-70ea-96d2-802b2899eadf/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/tasks/ce8ad456-fd23-468f-81c8-d4b225ae9ea3/","pulp_created":"2023-05-22T15:31:08.580729Z","state":"completed","name":"pulpcore.app.tasks.base.general_update","logging_cid":"65c35507443b4624936e6cbddd5979cd","started_at":"2023-05-22T15:31:08.586619Z","finished_at":"2023-05-22T15:31:08.591274Z","error":null,"worker":null,"parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["/api/v3/distributions/"]}'
+      string: '{"pulp_href":"/pulp/api/v3/tasks/01907ca5-f60b-70ea-96d2-802b2899eadf/","pulp_created":"2024-07-04T07:29:29.612184Z","pulp_last_updated":"2024-07-04T07:29:29.612197Z","state":"completed","name":"pulpcore.app.tasks.base.general_update","logging_cid":"bc2d9e82f9594b74a1bd5b9ac67c5a1e","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-07-04T07:29:29.619785Z","started_at":"2024-07-04T07:29:29.620626Z","finished_at":"2024-07-04T07:29:29.626127Z","error":null,"worker":null,"parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["pdrn:01907754-d46e-7322-8123-e26f64205c69:distributions","/api/v3/distributions/","shared:prn:core.domain:01907754-d46e-7322-8123-e26f64205c69","shared:/pulp/api/v3/domains/01907754-d46e-7322-8123-e26f64205c69/"]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -119,17 +123,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '502'
+      - '822'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:08 GMT
+      - Thu, 04 Jul 2024 07:29:29 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
@@ -149,14 +155,14 @@ interactions:
       Connection:
       - keep-alive
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/3a237389-4a15-4f98-956d-3001637d4074/
+    uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/01907ca5-ec85-7b52-b0d4-c79980471090/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/distributions/python/pypi/3a237389-4a15-4f98-956d-3001637d4074/","pulp_created":"2023-05-22T15:31:05.517216Z","base_path":"test_python_base_path","base_url":"https://5a298c727327/pypi/test_python_base_path/","content_guard":null,"pulp_labels":{},"name":"test_python_distribution","repository":null,"publication":"/pulp/api/v3/publications/python/pypi/b2ad85ed-de7b-4a64-8167-721569935875/","allow_uploads":true,"remote":null}'
+      string: '{"pulp_href":"/pulp/api/v3/distributions/python/pypi/01907ca5-ec85-7b52-b0d4-c79980471090/","pulp_created":"2024-07-04T07:29:27.174473Z","pulp_last_updated":"2024-07-04T07:29:29.624339Z","base_path":"test_python_base_path","base_url":"https://3659543407e4/pypi/test_python_base_path/","content_guard":null,"hidden":false,"pulp_labels":{},"name":"test_python_distribution","repository":null,"publication":"/pulp/api/v3/publications/python/pypi/01907ca5-d8ad-79a6-a39e-ec84001e8196/","allow_uploads":true,"remote":null}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -165,17 +171,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '452'
+      - '517'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65c35507443b4624936e6cbddd5979cd
+      - bc2d9e82f9594b74a1bd5b9ac67c5a1e
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:08 GMT
+      - Thu, 04 Jul 2024 07:29:29 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/?name=test_python_distribution_pull_through&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/python/pypi/b6be8cb8-0c5e-4cb7-a7d6-6ba3116f0549/","pulp_created":"2023-05-22T15:31:11.893783Z","base_path":"pull_through_mirror","base_url":"https://5a298c727327/pypi/pull_through_mirror/","content_guard":null,"pulp_labels":{},"name":"test_python_distribution_pull_through","repository":null,"publication":null,"allow_uploads":true,"remote":"/pulp/api/v3/remotes/python/python/05479ad8-ddeb-48cd-8dde-5745415995e4/"}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/python/pypi/01907ca6-0022-79c2-9344-5e51ba367293/","pulp_created":"2024-07-04T07:29:32.194777Z","pulp_last_updated":"2024-07-04T07:29:32.194788Z","base_path":"pull_through_mirror","base_url":"https://3659543407e4/pypi/pull_through_mirror/","content_guard":null,"hidden":false,"pulp_labels":{},"name":"test_python_distribution_pull_through","repository":null,"publication":null,"allow_uploads":true,"remote":"/pulp/api/v3/remotes/python/python/01907ca5-c9ea-7f70-8df3-713804becf15/"}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,17 +23,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '510'
+      - '575'
       Content-Type:
       - application/json
       Correlation-ID:
-      - f57bd565a07343a8a5131d09680b7cc7
+      - ae032ff44c334e4b832178ace0bfd9a0
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:14 GMT
+      - Thu, 04 Jul 2024 07:29:34 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

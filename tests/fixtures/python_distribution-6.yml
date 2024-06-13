@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/?name=test_python_distribution&offset=0&limit=1
   response:
@@ -27,13 +27,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 14c884ffe1bc41a2b43dec4184fcc585
+      - d3f0095856434fc7834453aafee1d226
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:10 GMT
+      - Thu, 04 Jul 2024 07:29:30 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.16-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/distributions/python/pypi/?name=test_python_distribution&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/python/pypi/3a237389-4a15-4f98-956d-3001637d4074/","pulp_created":"2023-05-22T15:31:05.517216Z","base_path":"test_python_base_path","base_url":"https://5a298c727327/pypi/test_python_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/cd14f05e-77b5-4b5c-a4c8-fc8046c39b0f/","pulp_labels":{},"name":"test_python_distribution","repository":null,"publication":"/pulp/api/v3/publications/python/pypi/b2ad85ed-de7b-4a64-8167-721569935875/","allow_uploads":true,"remote":null}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/python/pypi/01907ca5-ec85-7b52-b0d4-c79980471090/","pulp_created":"2024-07-04T07:29:27.174473Z","pulp_last_updated":"2024-07-04T07:29:27.174482Z","base_path":"test_python_base_path","base_url":"https://3659543407e4/pypi/test_python_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/01907ca5-dba5-7cf6-9395-099547aecec0/","hidden":false,"pulp_labels":{},"name":"test_python_distribution","repository":null,"publication":"/pulp/api/v3/publications/python/pypi/01907ca5-d8ad-79a6-a39e-ec84001e8196/","allow_uploads":true,"remote":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,17 +23,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '581'
+      - '646'
       Content-Type:
       - application/json
       Correlation-ID:
-      - ac3898eafcee4c7d9065f0e2b1739c6b
+      - abb81ddc5a4844f785df0d2a2d0bb2a7
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 22 May 2023 15:31:07 GMT
+      - Thu, 04 Jul 2024 07:29:28 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
