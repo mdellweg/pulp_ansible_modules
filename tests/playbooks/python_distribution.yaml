@@ -224,6 +224,52 @@
           - ansible_check_mode or result.distribution.base_url is regex(".*/pypi/pull_through_mirror")
           - result.distribution.remote == ""
 
+    - name: Retrieve repository
+      pulp.squeezer.python_repository:
+        name: test_python_repository
+      register: repository_result
+
+    - name: Distribute latest version of repository
+      pulp.squeezer.python_distribution:
+        name: test_python_distribution
+        base_path: test_python_base_path
+        repository: test_python_repository
+        state: present
+      register: result
+    - name: Verify distribute latest version of repository
+      ansible.builtin.assert:
+        that:
+          - result.changed == true
+          - result.distribution.name == "test_python_distribution"
+          - result.distribution.base_path == "test_python_base_path"
+          - ansible_check_mode or result.distribution.base_url is regex(".*/pypi/test_python_base_path")
+          - result.distribution.repository == repository_result.repository.pulp_href
+
+    - name: Distribute publication of repository (2nd try)
+      pulp.squeezer.python_distribution:
+        name: test_python_distribution
+        base_path: test_python_base_path
+        repository: test_python_repository
+        state: present
+      register: result
+    - name: Verify distribute publication of repository (2nd try)
+      ansible.builtin.assert:
+        that:
+          - result.changed == false
+
+    - name: Read distribution
+      pulp.squeezer.python_distribution:
+        name: test_python_distribution
+      register: result
+    - name: Verify read distribution
+      ansible.builtin.assert:
+        that:
+          - result.changed == false
+          - result.distribution.name == "test_python_distribution"
+          - result.distribution.base_path == "test_python_base_path"
+          - result.distribution.base_url is regex(".*/pypi/test_python_base_path")
+          - result.distribution.repository == repository_result.repository.pulp_href
+
 - hosts: localhost
   gather_facts: false
   vars_files:
