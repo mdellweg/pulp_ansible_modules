@@ -1,2 +1,2 @@
-localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python"
+localhost ansible_connection=local ansible_python_interpreter="python"
 tests ansible_connection=local ansible_python_interpreter=../vcr_python_wrapper.py
