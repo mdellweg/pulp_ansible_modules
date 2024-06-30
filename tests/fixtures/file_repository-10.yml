@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/?name=test_file_repository&offset=0&limit=1
   response:
@@ -27,15 +27,17 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - e596370e334849dfa6fc2d6d391afcb2
+      - a936ab71378f47038123d232044aae2d
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:33:54 GMT
+      - Wed, 28 Aug 2024 12:54:25 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:

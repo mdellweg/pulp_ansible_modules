@@ -9,16 +9,15 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/tasks/4e37410e-8a32-4dff-8c36-24571db3753f/
+    uri: http://pulp.example.org/pulp/api/v3/tasks/0191990b-e8e1-756f-8e30-726a8a1ff373/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/tasks/4e37410e-8a32-4dff-8c36-24571db3753f/","pulp_created":"2023-05-16T07:38:08.193767Z","state":"running","name":"pulp_file.app.tasks.synchronizing.synchronize","logging_cid":"67a234fb61ac45e9b89402fb54b9c18e","started_at":"2023-05-16T07:38:08.223627Z","finished_at":null,"error":null,"worker":"/pulp/api/v3/workers/a6fd1937-bdab-461b-aa22-5f0f3079da6d/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[{"message":"Downloading
+      string: '{"pulp_href":"/pulp/api/v3/tasks/0191990b-e8e1-756f-8e30-726a8a1ff373/","pulp_created":"2024-08-28T12:53:00.257966Z","pulp_last_updated":"2024-08-28T12:53:00.257976Z","state":"running","name":"pulp_file.app.tasks.synchronizing.synchronize","logging_cid":"ffb7bda7a3564c5b814f6441bf1e7941","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-08-28T12:53:00.271471Z","started_at":"2024-08-28T12:53:00.303731Z","finished_at":null,"error":null,"worker":"/pulp/api/v3/workers/019192cd-a16a-740f-9c1f-b736326f8e52/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[{"message":"Downloading
+        Metadata","code":"sync.downloading.metadata","state":"running","total":null,"done":0,"suffix":null},{"message":"Downloading
         Artifacts","code":"sync.downloading.artifacts","state":"running","total":null,"done":0,"suffix":null},{"message":"Associating
-        Content","code":"associating.content","state":"running","total":null,"done":0,"suffix":null},{"message":"Downloading
-        Metadata","code":"sync.downloading.metadata","state":"completed","total":null,"done":1,"suffix":null},{"message":"Parsing
-        Metadata Lines","code":"sync.parsing.metadata","state":"completed","total":10,"done":10,"suffix":null}],"created_resources":[null],"reserved_resources_record":["/pulp/api/v3/repositories/file/file/3c534a4c-f3d8-447d-b653-cf95f09a6dda/","shared:/pulp/api/v3/remotes/file/file/ea5cbf30-57b4-4971-ac16-fc288a09a3cb/"]}'
+        Content","code":"associating.content","state":"running","total":null,"done":0,"suffix":null}],"created_resources":[null],"reserved_resources_record":["prn:file.filerepository:0191990b-cc29-7def-ab01-5aa6546bbd81","shared:prn:file.fileremote:0191990b-ce22-7190-b788-f334408120b5","shared:prn:core.domain:019192cc-cf85-7342-bd0e-2c2a7d3a272e"]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -27,17 +26,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '1162'
+      - '1206'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 4c0dbbea469b4bc980ab3d1859bdb480
+      - 3462ba9242af4e2fb912727baf05c2e8
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Tue, 16 May 2023 07:38:10 GMT
+      - Wed, 28 Aug 2024 12:53:03 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

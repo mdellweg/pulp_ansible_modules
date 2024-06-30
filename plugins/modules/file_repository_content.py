@@ -3,11 +3,14 @@
 # copyright (c) 2020, Matthias Dellweg
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
-
 DOCUMENTATION = r"""
 ---
 module: file_repository_content
-short_description: Manage content in file repositories of a pulp server
+deprecated:
+  removed_in: "0.1.0"
+  why: "Not needed anymore."
+  alternative: "Use M(pulp.squeezer.file_content) instead."
+short_description: "Manage content in file repositories of a pulp server"
 description:
   - "This module adds or removes content to/from file repositories in a pulp server."
 options:

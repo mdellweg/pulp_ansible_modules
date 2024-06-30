@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/repositories/ansible/ansible/?name=test_ansible_repository&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/ansible/ansible/e20a12eb-6f6e-4cf6-a79b-c109ad0585d6/","pulp_created":"2023-05-15T15:56:23.417822Z","versions_href":"/pulp/api/v3/repositories/ansible/ansible/e20a12eb-6f6e-4cf6-a79b-c109ad0585d6/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/ansible/ansible/e20a12eb-6f6e-4cf6-a79b-c109ad0585d6/versions/0/","name":"test_ansible_repository","description":null,"retain_repo_versions":null,"remote":null,"last_synced_metadata_time":null,"gpgkey":null,"last_sync_task":null,"private":false}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/ansible/ansible/01919913-7d12-73b9-a099-c8f8e57b072f/","pulp_created":"2024-08-28T13:01:16.946819Z","pulp_last_updated":"2024-08-28T13:01:16.951402Z","versions_href":"/pulp/api/v3/repositories/ansible/ansible/01919913-7d12-73b9-a099-c8f8e57b072f/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/ansible/ansible/01919913-7d12-73b9-a099-c8f8e57b072f/versions/0/","name":"test_ansible_repository","description":null,"retain_repo_versions":null,"remote":null,"last_synced_metadata_time":null,"gpgkey":null,"last_sync_task":null,"private":false}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,17 +23,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '610'
+      - '660'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 3a34d45201894b10a1ed63757fe54137
+      - 9714eae393f74a038d76f96bf1b03bd1
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 15 May 2023 15:56:24 GMT
+      - Wed, 28 Aug 2024 13:01:17 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

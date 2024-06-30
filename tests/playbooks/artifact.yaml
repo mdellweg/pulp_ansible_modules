@@ -9,26 +9,25 @@
       username: "{{ pulp_username }}"
       password: "{{ pulp_password }}"
       validate_certs: "{{ pulp_validate_certs | default(true) }}"
+    pulp.squeezer.delete_orphans:
+      <<: *pulp_connection_details
   tasks:
-    - name: Make artifact absent
-      pulp.squeezer.artifact:
-        file: "{{ item }}"
-        state: absent
-      loop:
-        - data/small_artifact.dat
-        - data/large_artifact.dat
+    - name: "Clean up orphans"
+      pulp.squeezer.delete_orphans:
+        protection_time: 0
 - hosts: tests
   gather_facts: false
   vars_files:
     - vars/server.yaml
-  vars:
-    artifact_sha256: "{{ lookup('file', 'data/small_artifact.dat', lstrip=false, rstrip=false) | hash('sha256') }}"
   module_defaults:
     <<: *pulp_module_defaults
+  vars:
+    artifact_1_sha256: "{{ lookup('file', 'data/artifact_1.dat', lstrip=false, rstrip=false) | hash('sha256') }}"
+    artifact_2_sha256: "{{ lookup('file', 'data/artifact_2.dat', lstrip=false, rstrip=false) | hash('sha256') }}"
   tasks:
     - name: Create artifact by file
       pulp.squeezer.artifact:
-        file: data/small_artifact.dat
+        file: data/artifact_1.dat
         state: present
         refresh_api_cache: true
       register: result
@@ -36,11 +35,11 @@
       assert:
         that:
           - result.changed == true
-          - result.artifact.sha256 == artifact_sha256
+          - result.artifact.sha256 == artifact_1_sha256
 
     - name: Create artifact by file (2nd try)
       pulp.squeezer.artifact:
-        file: data/small_artifact.dat
+        file: data/artifact_1.dat
         state: present
       register: result
     - name: Verify create artifact by file (2nd try)
@@ -59,85 +58,43 @@
 
     - name: Read artifact by file
       pulp.squeezer.artifact:
-        file: data/small_artifact.dat
+        file: data/artifact_1.dat
       register: result
     - name: Verify read artifact by file
       assert:
         that:
           - result.changed == false
-          - result.artifact.sha256 == artifact_sha256
+          - result.artifact.sha256 == artifact_1_sha256
 
     - name: Read artifact by sha256
       pulp.squeezer.artifact:
-        sha256: "{{ artifact_sha256 }}"
+        sha256: "{{ artifact_1_sha256 }}"
       register: result
     - name: Verify read artifact by sha256
       assert:
         that:
           - result.changed == false
-          - result.artifact.sha256 == artifact_sha256
-
-    - name: Delete artifact by file
-      pulp.squeezer.artifact:
-        file: data/small_artifact.dat
-        state: absent
-      register: result
-    - name: Verify delete artifact by file
-      assert:
-        that:
-          - result.changed == true
-          - not result.artifact
-
-    - name: Delete artifact by file (2nd try)
-      pulp.squeezer.artifact:
-        file: data/small_artifact.dat
-        state: absent
-      register: result
-    - name: Verify delete artifact by file (2nd try)
-      assert:
-        that:
-          - result.changed == false
+          - result.artifact.sha256 == artifact_1_sha256
 
     - name: Create artifact with sha256
       pulp.squeezer.artifact:
-        file: data/small_artifact.dat
-        sha256: "{{ artifact_sha256 }}"
+        file: data/artifact_2.dat
+        sha256: "{{ artifact_2_sha256 }}"
         state: present
       register: result
     - name: Verify create artifact with sha256
       assert:
         that:
           - result.changed == true
-          - result.artifact.sha256 == artifact_sha256
+          - result.artifact.sha256 == artifact_2_sha256
 
     - name: Create artifact with sha256 (2nd try)
       pulp.squeezer.artifact:
-        file: data/small_artifact.dat
-        sha256: "{{ artifact_sha256 }}"
+        file: data/artifact_2.dat
+        sha256: "{{ artifact_2_sha256 }}"
         state: present
       register: result
     - name: Verify create artifact with sha256 (2nd try)
-      assert:
-        that:
-          - result.changed == false
-
-    - name: Delete artifact by sha256
-      pulp.squeezer.artifact:
-        sha256: "{{ artifact_sha256 }}"
-        state: absent
-      register: result
-    - name: Verify delete artifact by sha256
-      assert:
-        that:
-          - result.changed == true
-          - not result.artifact
-
-    - name: Delete artifact by sha256 (2nd try)
-      pulp.squeezer.artifact:
-        sha256: "{{ artifact_sha256 }}"
-        state: absent
-      register: result
-    - name: Verify delete artifact by sha256 (2nd try)
       assert:
         that:
           - result.changed == false

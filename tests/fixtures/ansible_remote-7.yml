@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/remotes/ansible/role/?name=test_ansible_role_remote&offset=0&limit=1
   response:
@@ -27,13 +27,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 0e40cd683b7a4b5b8e40134054b24156
+      - 21cdc12d659a4e12a80d0cfb48377eca
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Fri, 12 May 2023 09:19:45 GMT
+      - Wed, 28 Aug 2024 12:51:43 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

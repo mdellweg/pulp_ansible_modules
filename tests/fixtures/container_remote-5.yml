@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/remotes/container/container/?name=test_container_remote&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/container/container/198a9932-7825-4e24-a56b-46e4fb037d0d/","pulp_created":"2023-05-21T17:26:46.053651Z","name":"test_container_remote","url":"https://registry-1.docker.io","ca_cert":"abcd","client_cert":"efgh","tls_validation":false,"proxy_url":"http://proxy.int:3128","pulp_labels":{},"pulp_last_updated":"2023-05-21T17:26:48.857699Z","download_concurrency":null,"max_retries":null,"policy":"on_demand","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":true},{"name":"proxy_username","is_set":true},{"name":"proxy_password","is_set":true},{"name":"username","is_set":true},{"name":"password","is_set":true}],"upstream_name":"test_container_remote","include_tags":["bar"],"exclude_tags":["foo"],"sigstore":null}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/container/container/01919916-016e-7715-adb0-55244f7314c4/","pulp_created":"2024-08-28T13:04:01.902699Z","pulp_last_updated":"2024-08-28T13:04:04.028021Z","name":"test_container_remote","url":"https://registry-1.docker.io","ca_cert":"abcd","client_cert":"efgh","tls_validation":false,"proxy_url":"http://proxy.int:3128","pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"on_demand","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":true},{"name":"proxy_username","is_set":true},{"name":"proxy_password","is_set":true},{"name":"username","is_set":true},{"name":"password","is_set":true}],"upstream_name":"test_container_remote","include_tags":["bar"],"exclude_tags":["foo"],"sigstore":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -27,13 +27,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Sun, 21 May 2023 17:26:49 GMT
+      - Wed, 28 Aug 2024 13:04:04 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
@@ -58,14 +60,14 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: PATCH
-    uri: http://pulp.example.org/pulp/api/v3/remotes/container/container/198a9932-7825-4e24-a56b-46e4fb037d0d/
+    uri: http://pulp.example.org/pulp/api/v3/remotes/container/container/01919916-016e-7715-adb0-55244f7314c4/
   response:
     body:
-      string: '{"task":"/pulp/api/v3/tasks/7d1a9739-a696-4c4c-8ea0-f519567c4dec/"}'
+      string: '{"task":"/pulp/api/v3/tasks/01919916-0cdc-72c1-9b73-d3119d57c5ea/"}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -78,13 +80,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Sun, 21 May 2023 17:26:49 GMT
+      - Wed, 28 Aug 2024 13:04:04 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
@@ -104,14 +108,14 @@ interactions:
       Connection:
       - keep-alive
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/tasks/7d1a9739-a696-4c4c-8ea0-f519567c4dec/
+    uri: http://pulp.example.org/pulp/api/v3/tasks/01919916-0cdc-72c1-9b73-d3119d57c5ea/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/tasks/7d1a9739-a696-4c4c-8ea0-f519567c4dec/","pulp_created":"2023-05-21T17:26:49.729230Z","state":"completed","name":"pulpcore.app.tasks.base.general_update","logging_cid":"3b966ae74d6b48a5b22e8e50af24fabd","started_at":"2023-05-21T17:26:49.734953Z","finished_at":"2023-05-21T17:26:49.740269Z","error":null,"worker":null,"parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["/pulp/api/v3/remotes/container/container/198a9932-7825-4e24-a56b-46e4fb037d0d/"]}'
+      string: '{"pulp_href":"/pulp/api/v3/tasks/01919916-0cdc-72c1-9b73-d3119d57c5ea/","pulp_created":"2024-08-28T13:04:04.829116Z","pulp_last_updated":"2024-08-28T13:04:04.829130Z","state":"completed","name":"pulpcore.app.tasks.base.general_update","logging_cid":"13ca9ea2957a44b08ca31836bf8cad1c","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-08-28T13:04:04.840520Z","started_at":"2024-08-28T13:04:04.841446Z","finished_at":"2024-08-28T13:04:04.848397Z","error":null,"worker":null,"parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["prn:container.containerremote:01919916-016e-7715-adb0-55244f7314c4","shared:prn:core.domain:019192cc-cf85-7342-bd0e-2c2a7d3a272e"]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -120,17 +124,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '558'
+      - '740'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Sun, 21 May 2023 17:26:49 GMT
+      - Wed, 28 Aug 2024 13:04:04 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:
@@ -150,14 +156,14 @@ interactions:
       Connection:
       - keep-alive
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/remotes/container/container/198a9932-7825-4e24-a56b-46e4fb037d0d/
+    uri: http://pulp.example.org/pulp/api/v3/remotes/container/container/01919916-016e-7715-adb0-55244f7314c4/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/remotes/container/container/198a9932-7825-4e24-a56b-46e4fb037d0d/","pulp_created":"2023-05-21T17:26:46.053651Z","name":"test_container_remote","url":"https://registry-1.docker.io","ca_cert":"abcd","client_cert":"efgh","tls_validation":false,"proxy_url":"http://proxy.int:3128","pulp_labels":{},"pulp_last_updated":"2023-05-21T17:26:49.738228Z","download_concurrency":null,"max_retries":null,"policy":"on_demand","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":true},{"name":"proxy_username","is_set":true},{"name":"proxy_password","is_set":true},{"name":"username","is_set":true},{"name":"password","is_set":true}],"upstream_name":"test_container_remote","include_tags":["bar"],"exclude_tags":["foo"],"sigstore":null}'
+      string: '{"pulp_href":"/pulp/api/v3/remotes/container/container/01919916-016e-7715-adb0-55244f7314c4/","pulp_created":"2024-08-28T13:04:01.902699Z","pulp_last_updated":"2024-08-28T13:04:04.845436Z","name":"test_container_remote","url":"https://registry-1.docker.io","ca_cert":"abcd","client_cert":"efgh","tls_validation":false,"proxy_url":"http://proxy.int:3128","pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"on_demand","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":true},{"name":"proxy_username","is_set":true},{"name":"proxy_password","is_set":true},{"name":"username","is_set":true},{"name":"password","is_set":true}],"upstream_name":"test_container_remote","include_tags":["bar"],"exclude_tags":["foo"],"sigstore":null}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -170,13 +176,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 3b966ae74d6b48a5b22e8e50af24fabd
+      - 13ca9ea2957a44b08ca31836bf8cad1c
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Sun, 21 May 2023 17:26:50 GMT
+      - Wed, 28 Aug 2024 13:04:05 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

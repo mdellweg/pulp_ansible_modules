@@ -6,32 +6,16 @@
   vars:
     file1_sha256: "{{ lookup('file', 'data/file1.txt', lstrip=false, rstrip=false) | hash('sha256') }}"
   module_defaults: &pulp_module_defaults
-    pulp.squeezer.artifact: &pulp_connection_details
+    pulp.squeezer.file_content: &pulp_connection_details
       pulp_url: "{{ pulp_url }}"
       username: "{{ pulp_username }}"
       password: "{{ pulp_password }}"
       validate_certs: "{{ pulp_validate_certs | default(true) }}"
-    pulp.squeezer.file_content:
-      <<: *pulp_connection_details
     pulp.squeezer.file_repository:
       <<: *pulp_connection_details
     pulp.squeezer.file_repository_content:
       <<: *pulp_connection_details
   tasks:
-    - name: Create artifact
-      pulp.squeezer.artifact:
-        file: data/file1.txt
-        state: present
-      register: artifact_result
-    - name: Create file content unit
-      pulp.squeezer.file_content:
-        digest: "{{ artifact_result.artifact.sha256 }}"
-        relative_path: "{{ item }}"
-        state: present
-      loop:
-        - "data/file1.txt"
-        - "data/file2.txt"
-        - "data/file3.txt"
     - name: Make repository absent
       pulp.squeezer.file_repository:
         name: test_file_repository
@@ -40,6 +24,26 @@
       pulp.squeezer.file_repository:
         name: test_file_repository
         state: present
+    - name: Create file content unit
+      pulp.squeezer.file_content:
+        file: "data/file1.txt"
+        relative_path: "{{ item }}"
+        repository: test_file_repository
+        state: present
+      loop:
+        - "data/file1.txt"
+        - "data/file2.txt"
+        - "data/file3.txt"
+    - name: Remove file content unit from repository again
+      pulp.squeezer.file_content:
+        digest: "{{ file1_sha256 }}"
+        relative_path: "{{ item }}"
+        repository: test_file_repository
+        state: absent
+      loop:
+        - "data/file1.txt"
+        - "data/file2.txt"
+        - "data/file3.txt"
     - name: Clean openapi cache
       file:
         path: "{{ lookup('env', 'XDG_CACHE_HOME') | default('~/.cache') }}/squeezer"

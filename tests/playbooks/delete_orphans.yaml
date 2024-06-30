@@ -9,7 +9,7 @@
       username: "{{ pulp_username }}"
       password: "{{ pulp_password }}"
       validate_certs: "{{ pulp_validate_certs | default(true) }}"
-    pulp.squeezer.artifact:
+    pulp.squeezer.file_repository:
       <<: *pulp_connection_details
     pulp.squeezer.file_content:
       <<: *pulp_connection_details
@@ -17,16 +17,20 @@
     - name: Delete orphans
       pulp.squeezer.delete_orphans:
         protection_time: 0
-    - name: Create artifact
-      pulp.squeezer.artifact:
-        file: data/file1.txt
+    - name: Make repository present
+      pulp.squeezer.file_repository:
+        name: test_file_repository
         state: present
-      register: result
     - name: Create file content unit
       pulp.squeezer.file_content:
-        digest: "{{ result.artifact.sha256 }}"
-        relative_path: "data/file1.txt"
+        file: data/orphan.txt
+        relative_path: "data/orphan.txt"
+        repository: test_file_repository
         state: present
+    - name: Make repository absent
+      pulp.squeezer.file_repository:
+        name: test_file_repository
+        state: absent
     - name: Clean openapi cache
       file:
         path: "{{ lookup('env', 'XDG_CACHE_HOME') | default('~/.cache') }}/squeezer"
@@ -36,8 +40,6 @@
   gather_facts: false
   vars_files:
     - vars/server.yaml
-  vars:
-    file1_sha256: "{{ lookup('file', 'data/file1.txt', lstrip=false, rstrip=false) | hash('sha256') }}"
   module_defaults:
     <<: *pulp_module_defaults
   tasks:
