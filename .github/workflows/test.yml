@@ -15,22 +15,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python:
-          - "3.10"
-        ansible:
-          - stable-2.11
-          - stable-2.12
-          - stable-2.13
-          - stable-2.14
-          - stable-2.15
-          - devel
         include:
-          - python: "3.6"
-            ansible: "stable-2.11"
-          - python: "3.7"
-            ansible: "stable-2.11"
+          - python: "3.9"
+            ansible: "stable-2.15"
             image_tag: "latest"
+          - python: "3.10"
+            ansible: "stable-2.16"
+            lower_bounds: true
           - python: "3.11"
+            ansible: "stable-2.17"
+          - python: "3.12"
             ansible: "devel"
             image_tag: "nightly"
             lower_bounds: true
