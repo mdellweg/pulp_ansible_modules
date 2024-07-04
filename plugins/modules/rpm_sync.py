@@ -84,21 +84,21 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
 
 def main():
     with PulpAnsibleModule(
-        argument_spec=dict(
-            remote=dict(required=True),
-            repository=dict(required=True),
-            sync_policy=dict(
-                type="str",
-                default="additive",
-                choices=["additive", "mirror_complete", "mirror_content_only"],
-            ),
-            skip_types=dict(
-                type="list",
-                elements="str",
-                choices=["srpm", "treeinfo"],
-            ),
-            optimize=dict(type="bool", default=True),
-        ),
+        argument_spec={
+            "remote": {"required": True},
+            "repository": {"required": True},
+            "sync_policy": {
+                "type": "str",
+                "default": "additive",
+                "choices": ["additive", "mirror_complete", "mirror_content_only"],
+            },
+            "skip_types": {
+                "type": "list",
+                "elements": "str",
+                "choices": ["srpm", "treeinfo"],
+            },
+            "optimize": {"type": "bool", "default": True},
+        },
     ) as module:
         remote = PulpRpmRemote(module, {"name": module.params["remote"]})
         remote.find(failsafe=False)

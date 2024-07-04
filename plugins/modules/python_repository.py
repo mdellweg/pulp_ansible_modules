@@ -87,10 +87,10 @@ def main():
         entity_singular="repository",
         entity_plural="repositories",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            name=dict(),
-            description=dict(),
-        ),
+        argument_spec={
+            "name": {},
+            "description": {},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}

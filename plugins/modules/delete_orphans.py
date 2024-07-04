@@ -55,9 +55,9 @@ except ImportError:
 def main():
     with PulpAnsibleModule(
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            protection_time=dict(type="int"),
-        ),
+        argument_spec={
+            "protection_time": {"type": "int"},
+        },
     ) as module:
         if not module.check_mode:
             body = {}

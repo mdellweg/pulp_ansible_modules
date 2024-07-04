@@ -158,15 +158,15 @@ def main():
     with PulpAnsibleRemoteAnsibleModule(
         context_class=PulpRemoteContext,
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            content_type=dict(choices=["collection", "role"], default="collection"),
-            policy=dict(choices=["immediate"]),
-            collections=dict(type="list", elements="str"),
-            auth_url=dict(),
-            token=dict(no_log=True),
-            sync_dependencies=dict(type="bool"),
-            signed_only=dict(type="bool"),
-        ),
+        argument_spec={
+            "content_type": {"choices": ["collection", "role"], "default": "collection"},
+            "policy": {"choices": ["immediate"]},
+            "collections": {"type": "list", "elements": "str"},
+            "auth_url": {},
+            "token": {"no_log": True},
+            "sync_dependencies": {"type": "bool"},
+            "signed_only": {"type": "bool"},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         if module.params["content_type"] == "collection":

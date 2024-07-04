@@ -137,30 +137,30 @@ def main():
         entity_singular="access_policy",
         entity_plural="access_policies",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            viewset_name=dict(),
-            statements=dict(
-                type="list",
-                elements="dict",
-                options=dict(
-                    action=dict(required=True, type="list", elements="str"),
-                    principal=dict(required=True),
-                    condition=dict(type="raw"),
-                    effect=dict(required=True, choices=["allow", "deny"]),
-                ),
-            ),
-            creation_hooks=dict(
-                type="list",
-                elements="dict",
-                options=dict(
-                    function=dict(required=True),
-                    parameters=dict(required=True, type="raw"),
-                    permissions=dict(type="list", elements="str"),
-                ),
-                aliases=["permissions_assignment"],
-            ),
-            state=dict(choices=["present"]),
-        ),
+        argument_spec={
+            "viewset_name": {},
+            "statements": {
+                "type": "list",
+                "elements": "dict",
+                "options": {
+                    "action": {"required": True, "type": "list", "elements": "str"},
+                    "principal": {"required": True},
+                    "condition": {"type": "raw"},
+                    "effect": {"required": True, "choices": ["allow", "deny"]},
+                },
+            },
+            "creation_hooks": {
+                "type": "list",
+                "elements": "dict",
+                "options": {
+                    "function": {"required": True},
+                    "parameters": {"required": True, "type": "raw"},
+                    "permissions": {"type": "list", "elements": "str"},
+                },
+                "aliases": ["permissions_assignment"],
+            },
+            "state": {"choices": ["present"]},
+        },
         required_if=[("state", "present", ["viewset_name"])],
     ) as module:
         natural_key = {"viewset_name": module.params["viewset_name"]}

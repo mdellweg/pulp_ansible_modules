@@ -65,11 +65,11 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
 
 def main():
     with PulpAnsibleModule(
-        argument_spec=dict(
-            remote=dict(required=True),
-            repository=dict(required=True),
-            mirror=dict(type="bool", default=False),
-        ),
+        argument_spec={
+            "remote": {"required": True},
+            "repository": {"required": True},
+            "mirror": {"type": "bool", "default": False},
+        },
     ) as module:
         remote = PulpDebRemote(module, {"name": module.params["remote"]})
         remote.find(failsafe=False)

@@ -92,12 +92,12 @@ def main():
         entity_singular="content",
         entity_plural="contents",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            name=dict(),
-            namespace=dict(),
-            version=dict(),
-            sha256=dict(aliases=["digest"]),
-        ),
+        argument_spec={
+            "name": {},
+            "namespace": {},
+            "version": {},
+            "sha256": {"aliases": ["digest"]},
+        },
         required_if=[
             ("state", "present", ["name", "namespace", "version", "sha256"]),
             ("state", "absent", ["name", "namespace", "version"]),

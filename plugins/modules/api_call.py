@@ -55,11 +55,11 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import Pul
 
 def main():
     with PulpAnsibleModule(
-        argument_spec=dict(
-            operation_id=dict(required=True),
-            parameters=dict(type="dict"),
-            body=dict(type="dict"),
-        )
+        argument_spec={
+            "operation_id": {"required": True},
+            "parameters": {"type": "dict"},
+            "body": {"type": "dict"},
+        },
     ) as module:
         operation_id = module.params["operation_id"]
         parameters = module.params["parameters"]

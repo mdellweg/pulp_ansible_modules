@@ -43,24 +43,24 @@ __VERSION__ = "0.0.16-dev"
 
 class PulpAnsibleModule(AnsibleModule):
     def __init__(self, **kwargs):
-        argument_spec = dict(
-            pulp_url=dict(required=True, fallback=(env_fallback, ["SQUEEZER_PULP_URL"])),
-            username=dict(required=False, fallback=(env_fallback, ["SQUEEZER_USERNAME"])),
-            password=dict(
-                required=False,
-                no_log=True,
-                fallback=(env_fallback, ["SQUEEZER_PASSWORD"]),
-            ),
-            user_cert=dict(required=False, no_log=True),
-            user_key=dict(required=False, no_log=True),
-            validate_certs=dict(
-                type="bool",
-                default=True,
-                fallback=(env_fallback, ["SQUEEZER_VALIDATE_CERTS"]),
-            ),
-            refresh_api_cache=dict(type="bool", default=False),
-            timeout=dict(type="int", default=10),
-        )
+        argument_spec = {
+            "pulp_url": {"required": True, "fallback": (env_fallback, ["SQUEEZER_PULP_URL"])},
+            "username": {"required": False, "fallback": (env_fallback, ["SQUEEZER_USERNAME"])},
+            "password": {
+                "required": False,
+                "no_log": True,
+                "fallback": (env_fallback, ["SQUEEZER_PASSWORD"]),
+            },
+            "user_cert": {"required": False, "no_log": True},
+            "user_key": {"required": False, "no_log": True},
+            "validate_certs": {
+                "type": "bool",
+                "default": True,
+                "fallback": (env_fallback, ["SQUEEZER_VALIDATE_CERTS"]),
+            },
+            "refresh_api_cache": {"type": "bool", "default": False},
+            "timeout": {"type": "int", "default": 10},
+        }
         argument_spec.update(kwargs.pop("argument_spec", {}))
         if not kwargs.pop("no_auth", False):
             required_one_of = [
@@ -144,11 +144,11 @@ class PulpAnsibleModule(AnsibleModule):
 
 class PulpEntityAnsibleModule(PulpAnsibleModule):
     def __init__(self, context_class, entity_singular, entity_plural, **kwargs):
-        argument_spec = dict(
-            state=dict(
-                choices=["present", "absent"],
-            ),
-        )
+        argument_spec = {
+            "state": {
+                "choices": ["present", "absent"],
+            },
+        }
         argument_spec.update(kwargs.pop("argument_spec", {}))
         super().__init__(argument_spec=argument_spec, **kwargs)
         self.state = self.params["state"]
@@ -220,26 +220,26 @@ class PulpEntityAnsibleModule(PulpAnsibleModule):
 
 class PulpRemoteAnsibleModule(PulpEntityAnsibleModule):
     def __init__(self, **kwargs):
-        argument_spec = dict(
-            name=dict(),
-            url=dict(),
-            remote_username=dict(no_log=True),
-            remote_password=dict(no_log=True),
-            ca_cert=dict(),
-            client_cert=dict(),
-            client_key=dict(no_log=True),
-            tls_validation=dict(type="bool"),
-            proxy_url=dict(),
-            proxy_username=dict(no_log=True),
-            proxy_password=dict(no_log=True),
-            download_concurrency=dict(type="int"),
-            rate_limit=dict(type="int"),
-            total_timeout=dict(type="float"),
-            connect_timeout=dict(type="float"),
-            sock_connect_timeout=dict(type="float"),
-            sock_read_timeout=dict(type="float"),
-            max_retries=dict(type="int"),
-        )
+        argument_spec = {
+            "name": {},
+            "url": {},
+            "remote_username": {"no_log": True},
+            "remote_password": {"no_log": True},
+            "ca_cert": {},
+            "client_cert": {},
+            "client_key": {"no_log": True},
+            "tls_validation": {"type": "bool"},
+            "proxy_url": {},
+            "proxy_username": {"no_log": True},
+            "proxy_password": {"no_log": True},
+            "download_concurrency": {"type": "int"},
+            "rate_limit": {"type": "int"},
+            "total_timeout": {"type": "float"},
+            "connect_timeout": {"type": "float"},
+            "sock_connect_timeout": {"type": "float"},
+            "sock_read_timeout": {"type": "float"},
+            "max_retries": {"type": "int"},
+        }
         argument_spec.update(kwargs.pop("argument_spec", {}))
 
         kwargs.setdefault("entity_singular", "remote")

@@ -83,12 +83,12 @@ except ImportError:
 def main():
     with PulpAnsibleModule(
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            content_type=dict(choices=["collection", "role"], default="collection"),
-            remote=dict(required=False),
-            repository=dict(required=True),
-            timeout=dict(type="int", default=3600),
-        ),
+        argument_spec={
+            "content_type": {"choices": ["collection", "role"], "default": "collection"},
+            "remote": {"required": False},
+            "repository": {"required": True},
+            "timeout": {"type": "int", "default": 3600},
+        },
     ) as module:
         if module.params["content_type"] == "collection":
             remote_context_class = PulpAnsibleCollectionRemoteContext

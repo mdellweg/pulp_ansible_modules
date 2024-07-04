@@ -45,22 +45,22 @@ def pulp_parse_version(version_str):
 
 class PulpAnsibleModule(AnsibleModule):
     def __init__(self, **kwargs):
-        argument_spec = dict(
-            pulp_url=dict(required=True, fallback=(env_fallback, ["SQUEEZER_PULP_URL"])),
-            username=dict(required=True, fallback=(env_fallback, ["SQUEEZER_USERNAME"])),
-            password=dict(
-                required=True,
-                no_log=True,
-                fallback=(env_fallback, ["SQUEEZER_PASSWORD"]),
-            ),
-            validate_certs=dict(
-                type="bool",
-                default=True,
-                fallback=(env_fallback, ["SQUEEZER_VALIDATE_CERTS"]),
-            ),
-            refresh_api_cache=dict(type="bool", default=False),
-            timeout=dict(type="int", required=False, default=10),
-        )
+        argument_spec = {
+            "pulp_url": {"required": True, "fallback": (env_fallback, ["SQUEEZER_PULP_URL"])},
+            "username": {"required": True, "fallback": (env_fallback, ["SQUEEZER_USERNAME"])},
+            "password": {
+                "required": True,
+                "no_log": True,
+                "fallback": (env_fallback, ["SQUEEZER_PASSWORD"]),
+            },
+            "validate_certs": {
+                "type": "bool",
+                "default": True,
+                "fallback": (env_fallback, ["SQUEEZER_VALIDATE_CERTS"]),
+            },
+            "refresh_api_cache": {"type": "bool", "default": False},
+            "timeout": {"type": "int", "required": False, "default": 10},
+        }
         argument_spec.update(kwargs.pop("argument_spec", {}))
         supports_check_mode = kwargs.pop("supports_check_mode", True)
         super(PulpAnsibleModule, self).__init__(
@@ -112,37 +112,37 @@ class PulpAnsibleModule(AnsibleModule):
 
 class PulpEntityAnsibleModule(PulpAnsibleModule):
     def __init__(self, **kwargs):
-        argument_spec = dict(
-            state=dict(
-                choices=["present", "absent"],
-            ),
-        )
+        argument_spec = {
+            "state": {
+                "choices": ["present", "absent"],
+            },
+        }
         argument_spec.update(kwargs.pop("argument_spec", {}))
         super(PulpEntityAnsibleModule, self).__init__(argument_spec=argument_spec, **kwargs)
 
 
 class PulpRemoteAnsibleModule(PulpEntityAnsibleModule):
     def __init__(self, **kwargs):
-        argument_spec = dict(
-            name=dict(),
-            url=dict(),
-            remote_username=dict(no_log=True),
-            remote_password=dict(no_log=True),
-            ca_cert=dict(),
-            client_cert=dict(),
-            client_key=dict(no_log=True),
-            tls_validation=dict(type="bool"),
-            proxy_url=dict(),
-            proxy_username=dict(no_log=True),
-            proxy_password=dict(no_log=True),
-            download_concurrency=dict(type="int"),
-            rate_limit=dict(type="int"),
-            total_timeout=dict(type="float"),
-            connect_timeout=dict(type="float"),
-            sock_connect_timeout=dict(type="float"),
-            sock_read_timeout=dict(type="float"),
-            max_retries=dict(type="int"),
-        )
+        argument_spec = {
+            "name": {},
+            "url": {},
+            "remote_username": {"no_log": True},
+            "remote_password": {"no_log": True},
+            "ca_cert": {},
+            "client_cert": {},
+            "client_key": {"no_log": True},
+            "tls_validation": {"type": "bool"},
+            "proxy_url": {},
+            "proxy_username": {"no_log": True},
+            "proxy_password": {"no_log": True},
+            "download_concurrency": {"type": "int"},
+            "rate_limit": {"type": "int"},
+            "total_timeout": {"type": "float"},
+            "connect_timeout": {"type": "float"},
+            "sock_connect_timeout": {"type": "float"},
+            "sock_read_timeout": {"type": "float"},
+            "max_retries": {"type": "int"},
+        }
         argument_spec.update(kwargs.pop("argument_spec", {}))
         super(PulpRemoteAnsibleModule, self).__init__(argument_spec=argument_spec, **kwargs)
 

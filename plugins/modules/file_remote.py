@@ -86,9 +86,9 @@ def main():
     with PulpRemoteAnsibleModule(
         context_class=PulpFileRemoteContext,
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            policy=dict(choices=["immediate", "on_demand", "streamed"]),
-        ),
+        argument_spec={
+            "policy": {"choices": ["immediate", "on_demand", "streamed"]},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}
