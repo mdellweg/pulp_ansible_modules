@@ -1,25 +1,28 @@
 ---
-name: release
+name: "Release"
 
 on:
   push:
     tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   release:
-    runs-on: ubuntu-20.04
-    if: github.repository == 'pulp/squeezer'
+    runs-on: "ubuntu-20.04"
+    if: "github.repository == 'pulp/squeezer'"
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: "actions/checkout@v4"
+      - name: "Set up Python"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.10"
-      - name: Install Ansible
-        run: pip install --upgrade ansible
-      - name: Build Ansible Collection
-        run: make dist
-      - name: Deploy Ansible Collection
-        run: make publish GALAXY_API_KEY=${{ secrets.GALAXY_API_KEY }}
+      - name: "Install Ansible"
+        run: |
+          pip install --upgrade ansible
+      - name: "Build Ansible Collection"
+        run: |
+          make dist
+      - name: "Deploy Ansible Collection"
+        run: |
+          make publish GALAXY_API_KEY=${{ secrets.GALAXY_API_KEY }}
 ...

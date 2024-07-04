@@ -1,63 +1,63 @@
 ---
-name: CI
+name: "CI"
 
-on: [pull_request]
+on:
+  - "pull_request"
 
 concurrency:
-  group: ${{ github.ref_name }}-${{ github.workflow }}
+  group: "${{ github.ref_name }}-${{ github.workflow }}"
   cancel-in-progress: true
-
-env:
-  COLORTERM: 'yes'
-  TERM: 'xterm-256color'
-  PYTEST_ADDOPTS: '--color=yes'
-  CONTAINER_RUNTIME: 'docker'
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-latest"
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: "actions/checkout@v4"
+      - name: "Set up Python"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.10"
-      - name: Install dependencies
-        run: pip install -r requirements-lint.txt
-      - name: Run linter
-        run: make lint
+      - name: "Install dependencies"
+        run: |
+          pip install -r requirements-lint.txt
+      - name: "Run linter"
+        run: |
+          make lint
 
   test:
     needs:
-      - lint
+      - "lint"
     uses: "./.github/workflows/test.yml"
 
   sanity:
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-latest"
     needs:
-      - lint
+      - "lint"
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: "actions/checkout@v4"
+      - name: "Set up Python"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.11"
-      - name: Install Ansible
-        run: pip install git+https://github.com/ansible/ansible.git@devel
-      - name: Install dependencies
-        run: make test-setup
-      - name: Run sanity check
-        run: make SANITY_OPTS="--local" sanity
+      - name: "Install Ansible"
+        run: |
+          pip install ansible-core~=2.17
+      - name: "Install dependencies"
+        run: |
+          make test-setup
+      - name: "Run sanity check"
+        run: |
+          make SANITY_OPTS="--local" sanity
 
   ready-to-ship:
     # This is a dummy dependent task to have a single entry for the branch protection rules.
-    runs-on: ubuntu-latest
+    runs-on:  "ubuntu-latest"
     needs:
-      - lint
-      - test
-      - sanity
+      - "lint"
+      - "test"
+      - "sanity"
     steps:
-      - name: All set
+      - name: "All set"
         run: |
           echo "CI says: Looks good!"
 ...

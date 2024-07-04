@@ -4,11 +4,6 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-from __future__ import absolute_import, division, print_function
-
-__metaclass__ = type
-
-
 DOCUMENTATION = r"""
 ---
 module: artifact
@@ -123,11 +118,11 @@ def main():
         entity_singular="artifact",
         entity_plural="artifacts",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            file=dict(type="path"),
-            sha256=dict(),
-            chunk_size=dict(type="int", default=33554432),
-        ),
+        argument_spec={
+            "file": {"type": "path"},
+            "sha256": {},
+            "chunk_size": {"type": "int", "default": 33554432},
+        },
         required_if=[("state", "present", ["file"])],
     ) as module:
         sha256 = module.params["sha256"]

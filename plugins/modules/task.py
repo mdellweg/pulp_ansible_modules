@@ -4,11 +4,6 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-from __future__ import absolute_import, division, print_function
-
-__metaclass__ = type
-
-
 DOCUMENTATION = r"""
 ---
 module: task
@@ -100,12 +95,12 @@ def main():
         entity_singular="task",
         entity_plural="tasks",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            pulp_href=dict(),
-            state=dict(
-                choices=["absent", "canceled", "completed"],
-            ),
-        ),
+        argument_spec={
+            "pulp_href": {},
+            "state": {
+                "choices": ["absent", "canceled", "completed"],
+            },
+        },
         required_if=[
             ("state", "absent", ["pulp_href"]),
             ("state", "canceled", ["pulp_href"]),
