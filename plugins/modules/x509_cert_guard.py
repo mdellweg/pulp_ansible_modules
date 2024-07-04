@@ -4,11 +4,6 @@
 # GNU General Public License v3.0+ (see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 
-from __future__ import absolute_import, division, print_function
-
-__metaclass__ = type
-
-
 DOCUMENTATION = r"""
 ---
 module: x509_cert_guard
@@ -102,11 +97,11 @@ def main():
         entity_singular="content_guard",
         entity_plural="content_guards",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            name=dict(),
-            description=dict(),
-            ca_certificate=dict(),
-        ),
+        argument_spec={
+            "name": {},
+            "description": {},
+            "ca_certificate": {},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}
