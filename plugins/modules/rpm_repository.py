@@ -108,14 +108,14 @@ DESIRED_KEYS = {"autopublish", "remote", "repo_config", "retain_package_versions
 
 def main():
     with PulpEntityAnsibleModule(
-        argument_spec=dict(
-            name=dict(),
-            description=dict(),
-            autopublish=dict(type="bool"),
-            remote=dict(),
-            repo_config=dict(type="raw"),
-            retain_package_versions=dict(type="int"),
-        ),
+        argument_spec={
+            "name": {},
+            "description": {},
+            "autopublish": {"type": "bool"},
+            "remote": {},
+            "repo_config": {"type": "raw"},
+            "retain_package_versions": {"type": "int"},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}

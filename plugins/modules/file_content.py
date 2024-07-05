@@ -81,10 +81,10 @@ def main():
         entity_singular="content",
         entity_plural="contents",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            sha256=dict(aliases=["digest"]),
-            relative_path=dict(),
-        ),
+        argument_spec={
+            "sha256": {"aliases": ["digest"]},
+            "relative_path": {},
+        },
         required_if=[
             ("state", "present", ["sha256", "relative_path"]),
             ("state", "absent", ["sha256", "relative_path"]),

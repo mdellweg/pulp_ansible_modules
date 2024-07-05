@@ -101,12 +101,12 @@ def main():
     with PulpRemoteAnsibleModule(
         context_class=PulpContainerRemoteContext,
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            exclude_tags=dict(type="list", elements="str"),
-            include_tags=dict(type="list", elements="str"),
-            policy=dict(choices=["immediate", "on_demand", "streamed"]),
-            upstream_name=dict(),
-        ),
+        argument_spec={
+            "exclude_tags": {"type": "list", "elements": "str"},
+            "include_tags": {"type": "list", "elements": "str"},
+            "policy": {"choices": ["immediate", "on_demand", "streamed"]},
+            "upstream_name": {},
+        },
         required_if=[
             ("state", "present", ["name", "upstream_name"]),
             ("state", "absent", ["name"]),

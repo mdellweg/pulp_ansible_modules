@@ -90,12 +90,12 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
 
 def main():
     with PulpEntityAnsibleModule(
-        argument_spec=dict(
-            name=dict(),
-            base_path=dict(),
-            publication=dict(),
-            content_guard=dict(),
-        ),
+        argument_spec={
+            "name": {},
+            "base_path": {},
+            "publication": {},
+            "content_guard": {},
+        },
         required_if=[
             ("state", "present", ["name", "base_path"]),
             ("state", "absent", ["name"]),

@@ -67,14 +67,14 @@ except ImportError:
 def main():
     with PulpAnsibleModule(
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            finished_before=dict(),
-            states=dict(
-                type="list",
-                elements="str",
-                choices=["canceled", "completed", "failed"],
-            ),
-        ),
+        argument_spec={
+            "finished_before": {},
+            "states": {
+                "type": "list",
+                "elements": "str",
+                "choices": ["canceled", "completed", "failed"],
+            },
+        },
     ) as module:
         task_ctx = PulpTaskContext(module.pulp_ctx)
         summary = {"objects": {}, "total": 0, "errors": 0}

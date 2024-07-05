@@ -77,9 +77,9 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
 
 def main():
     with PulpRemoteAnsibleModule(
-        argument_spec=dict(
-            policy=dict(choices=["immediate", "on_demand", "streamed"]),
-        ),
+        argument_spec={
+            "policy": {"choices": ["immediate", "on_demand", "streamed"]},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}

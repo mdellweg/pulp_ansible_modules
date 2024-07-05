@@ -74,11 +74,11 @@ except ImportError:
 def main():
     with PulpAnsibleModule(
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            remote=dict(required=False),
-            repository=dict(required=True),
-            timeout=dict(type="int", default=3600),
-        ),
+        argument_spec={
+            "remote": {"required": False},
+            "repository": {"required": True},
+            "timeout": {"type": "int", "default": 3600},
+        },
     ) as module:
         repository_ctx = PulpContainerRepositoryContext(
             module.pulp_ctx, entity={"name": module.params["repository"]}

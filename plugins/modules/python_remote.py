@@ -106,12 +106,12 @@ def main():
     with PulpRemoteAnsibleModule(
         context_class=PulpPythonRemoteContext,
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            policy=dict(choices=["immediate", "on_demand", "streamed"]),
-            includes=dict(type="list", elements="str"),
-            excludes=dict(type="list", elements="str"),
-            prereleases=dict(type="bool"),
-        ),
+        argument_spec={
+            "policy": {"choices": ["immediate", "on_demand", "streamed"]},
+            "includes": {"type": "list", "elements": "str"},
+            "excludes": {"type": "list", "elements": "str"},
+            "prereleases": {"type": "bool"},
+        },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}

@@ -110,26 +110,26 @@ except ImportError:
 def main():
     with PulpAnsibleModule(
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            repository=dict(required=True),
-            base_version=dict(type="int"),
-            present_content=dict(
-                type="list",
-                elements="dict",
-                options=dict(
-                    relative_path=dict(required=True),
-                    sha256=dict(required=True, aliases=["digest"]),
-                ),
-            ),
-            absent_content=dict(
-                type="list",
-                elements="dict",
-                options=dict(
-                    relative_path=dict(required=True),
-                    sha256=dict(required=True, aliases=["digest"]),
-                ),
-            ),
-        ),
+        argument_spec={
+            "repository": {"required": True},
+            "base_version": {"type": "int"},
+            "present_content": {
+                "type": "list",
+                "elements": "dict",
+                "options": {
+                    "relative_path": {"required": True},
+                    "sha256": {"required": True, "aliases": ["digest"]},
+                },
+            },
+            "absent_content": {
+                "type": "list",
+                "elements": "dict",
+                "options": {
+                    "relative_path": {"required": True},
+                    "sha256": {"required": True, "aliases": ["digest"]},
+                },
+            },
+        },
     ) as module:
         repository_name = module.params["repository"]
         version = module.params["base_version"]

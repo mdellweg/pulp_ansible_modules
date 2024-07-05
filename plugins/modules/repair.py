@@ -93,10 +93,10 @@ def main():
     with PulpAnsibleModule(
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
         supports_check_mode=False,
-        argument_spec=dict(
-            repository=dict(required=True),
-            version=dict(type="int"),
-        ),
+        argument_spec={
+            "repository": {"required": True},
+            "version": {"type": "int"},
+        },
     ) as module:
         repository_ctx = PulpRepositoryContext(
             module.pulp_ctx, entity={"name": module.params["repository"]}

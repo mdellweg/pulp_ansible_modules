@@ -144,14 +144,14 @@ def main():
         entity_singular="distribution",
         entity_plural="distributions",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            name=dict(),
-            base_path=dict(),
-            publication=dict(),
-            content_guard=dict(),
-            remote=dict(),
-            repository=dict(),
-        ),
+        argument_spec={
+            "name": {},
+            "base_path": {},
+            "publication": {},
+            "content_guard": {},
+            "remote": {},
+            "repository": {},
+        },
         required_if=[
             ("state", "present", ["name", "base_path"]),
             ("state", "absent", ["name"]),

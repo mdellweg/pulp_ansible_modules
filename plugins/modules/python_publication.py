@@ -88,10 +88,10 @@ def main():
         entity_singular="publication",
         entity_plural="publications",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
-        argument_spec=dict(
-            repository=dict(),
-            version=dict(type="int"),
-        ),
+        argument_spec={
+            "repository": {},
+            "version": {"type": "int"},
+        },
         required_if=(
             ["state", "present", ["repository"]],
             ["state", "absent", ["repository"]],
