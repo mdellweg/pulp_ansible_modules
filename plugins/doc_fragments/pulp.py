@@ -42,6 +42,11 @@ options:
       - It is recommended to use this once with the M(pulp.squeezer.status) module at the beginning of the playbook.
     type: bool
     default: false
+  timeout:
+    description:
+      - Time in seconds to wait for tasks.
+    type: int
+    default: 10
 """
 
     GLUE = r"""

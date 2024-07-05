@@ -40,6 +40,7 @@ class OpenAPI:
         password=None,
         validate_certs=True,
         refresh_cache=False,
+        timeout=10,
     ):
         self.doc_path = doc_path
 
@@ -60,6 +61,7 @@ class OpenAPI:
             headers=headers,
             validate_certs=validate_certs,
             force_basic_auth=True,
+            timeout=timeout,
         )
 
         self.load_api(refresh_cache=refresh_cache)
