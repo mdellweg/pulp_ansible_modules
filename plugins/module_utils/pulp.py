@@ -59,7 +59,7 @@ class PulpAnsibleModule(AnsibleModule):
                 fallback=(env_fallback, ["SQUEEZER_VALIDATE_CERTS"]),
             ),
             refresh_api_cache=dict(type="bool", default=False),
-            timeout=dict(type=int, required=False, default=10),
+            timeout=dict(type="int", required=False, default=10),
         )
         argument_spec.update(kwargs.pop("argument_spec", {}))
         supports_check_mode = kwargs.pop("supports_check_mode", True)
