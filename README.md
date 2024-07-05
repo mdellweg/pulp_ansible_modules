@@ -1,6 +1,6 @@
 ![Build Status](https://github.com/pulp/squeezer/workflows/CI/badge.svg)
 
-# Squeezer, an Ansible collection modules for Pulp
+# Squeezer, an Ansible collection of modules for Pulp
 
 This collection provides a set of ansible modules to control a [pulp](https://pulpproject.org) server (version 3) in a descriptive way.
 This is neither to be confused with [pulp\_installer](https://github.com/pulp/pulp_installer) to install pulp,
