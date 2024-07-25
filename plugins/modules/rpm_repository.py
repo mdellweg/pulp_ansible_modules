@@ -38,7 +38,12 @@ options:
     version_added: "0.0.16"
   retain_package_versions:
     description:
-      - Max number of latest versions of each package to keep (optional)
+      - Max number of latest versions of each package to keep
+    type: int
+    version_added: "0.0.16"
+  retain_repo_versions:
+    description:
+      - Max number of repository versions to keep
     type: int
     version_added: "0.0.16"
 extends_documentation_fragment:
@@ -103,7 +108,13 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
     PulpRpmRepository,
 )
 
-DESIRED_KEYS = {"autopublish", "remote", "repo_config", "retain_package_versions"}
+DESIRED_KEYS = {
+    "autopublish",
+    "remote",
+    "repo_config",
+    "retain_package_versions",
+    "retain_repo_versions",
+}
 
 
 def main():
@@ -115,6 +126,7 @@ def main():
             "remote": {},
             "repo_config": {"type": "raw"},
             "retain_package_versions": {"type": "int"},
+            "retain_repo_versions": {"type": "int"},
         },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
