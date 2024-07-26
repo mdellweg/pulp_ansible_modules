@@ -31,6 +31,22 @@ options:
       - immediate
       - on_demand
       - streamed
+  sync_installer:
+    description:
+      - Sync installer packages
+    type: bool
+    version_added: "0.0.16"
+  sync_sources:
+    description:
+      - Sync source packages
+    type: bool
+    version_added: "0.0.16"
+  sync_udebs:
+    description:
+      - Sync installer packages
+    type: bool
+    version_added: "0.0.16"
+
 extends_documentation_fragment:
   - pulp.squeezer.pulp
   - pulp.squeezer.pulp.entity_state
@@ -96,6 +112,9 @@ def main():
             "components": {},
             "distributions": {},
             "policy": {"choices": ["immediate", "on_demand", "streamed"]},
+            "sync_installer": {"type": "bool"},
+            "sync_sources": {"type": "bool"},
+            "sync_udebs": {"type": "bool"},
         },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
@@ -109,6 +128,9 @@ def main():
                 "distributions",
                 "download_concurrency",
                 "policy",
+                "sync_installer",
+                "sync_sources",
+                "sync_udebs",
                 "tls_validation",
             ]
             if module.params[key] is not None

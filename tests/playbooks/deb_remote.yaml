@@ -88,6 +88,33 @@
         that:
           - result.changed == false
 
+    - name: Modify sync_installer, sync_sources, and sync_udebs on remote
+      pulp.squeezer.deb_remote:
+        name: test_deb_remote
+        sync_installer: true
+        sync_sources: true
+        sync_udebs: true
+        state: present
+      register: result
+    - name: Verify modify sync_installer
+      assert:
+        that:
+          - result.changed == true
+          - result.remote.sync_installer == true
+
+    - name: Modify sync_installer, sync_sources, and sync_udebs on remote (2nd try)
+      pulp.squeezer.deb_remote:
+        name: test_deb_remote
+        sync_installer: true
+        sync_sources: true
+        sync_udebs: true
+        state: present
+      register: result
+    - name: Verify modify sync_installer, sync_sources, and sync_udebs on remote (2nd try)
+      assert:
+        that:
+          - result.changed == false
+
     - name: List remotes
       pulp.squeezer.deb_remote: {}
       register: result
