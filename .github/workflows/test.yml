@@ -41,16 +41,13 @@ jobs:
         uses: "actions/setup-python@v5"
         with:
           python-version: "${{ matrix.python }}"
-      - name: "Install Ansible"
-        run: |
-          pip install git+https://github.com/ansible/ansible.git@${{ matrix.ansible }}
       - name: "Install dependencies"
         run: |
           if [ "${{matrix.lower_bounds}}" ]
           then
-            make test-setup-lower-bounds
+            make ANSIBLE_VERSION=${{ matrix.ansible }} test-setup-lower-bounds
           else
-            make test-setup
+            make ANSIBLE_VERSION=${{ matrix.ansible }} test-setup
           fi
       - name: "Run basic tests"
         run: |

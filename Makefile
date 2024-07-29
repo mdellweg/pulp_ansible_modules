@@ -10,6 +10,7 @@ $(foreach PLUGIN_TYPE,$(PLUGIN_TYPES),$(eval _$(PLUGIN_TYPE) := $(filter-out %__
 DEPENDENCIES := $(METADATA) $(foreach PLUGIN_TYPE,$(PLUGIN_TYPES),$(_$(PLUGIN_TYPE))) $(foreach ROLE,$(ROLES),$(wildcard $(ROLE)/*/*)) $(foreach ROLE,$(ROLES),$(ROLE)/README.md)
 
 PYTHON_VERSION = $(shell python -c 'import sys; print("{}.{}".format(sys.version_info.major, sys.version_info.minor))')
+ANSIBLE_VERSION = devel
 SANITY_OPTS =
 TEST =
 PYTEST = pytest -n 4 -v
@@ -83,12 +84,12 @@ clean_%: FORCE $(MANIFEST) | tests/playbooks/vars/server.yaml
 	ansible-playbook --tags teardown,cleanup -i tests/inventory/hosts 'tests/playbooks/$*.yaml'
 
 test-setup: requirements.txt | tests/playbooks/vars/server.yaml
-	pip install --upgrade pip
-	pip install -r requirements.txt
+	pip install --upgrade pip "setuptools<72.0.0"
+	pip install git+https://github.com/ansible/ansible.git@$(ANSIBLE_VERSION) -r requirements.txt
 
 test-setup-lower-bounds: requirements.txt lower_bounds_constraints.lock | tests/playbooks/vars/server.yaml
-	pip install --upgrade pip
-	pip install -r requirements.txt -c lower_bounds_constraints.lock
+	pip install --upgrade pip "setuptools<72.0.0"
+	pip install git+https://github.com/ansible/ansible.git@$(ANSIBLE_VERSION) -r requirements.txt -c lower_bounds_constraints.lock
 
 tests/playbooks/vars/server.yaml:
 	cp $@.example $@

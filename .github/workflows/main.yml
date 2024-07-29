@@ -16,9 +16,10 @@ jobs:
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
-          python-version: "3.10"
+          python-version: "3.12"
       - name: "Install dependencies"
         run: |
+          pip install --upgrade pip "setuptools<72.0.0"
           pip install -r requirements-lint.txt
       - name: "Run linter"
         run: |
@@ -38,10 +39,7 @@ jobs:
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
-          python-version: "3.11"
-      - name: "Install Ansible"
-        run: |
-          pip install ansible-core~=2.17
+          python-version: "3.12"
       - name: "Install dependencies"
         run: |
           make test-setup

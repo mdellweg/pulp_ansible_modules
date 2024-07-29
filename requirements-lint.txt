@@ -1,5 +1,5 @@
-ansible
-black
-galaxy-importer
-isort
-yamllint
+ansible~=10.2.0
+black~=24.4.2
+galaxy-importer~=0.4.24
+isort~=5.13.2
+yamllint~=1.35.1
