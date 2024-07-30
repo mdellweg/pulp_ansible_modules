@@ -182,6 +182,29 @@
         that:
           - result.changed == false
 
+    - name: Modify retain_repo_versions to 5 in repository
+      pulp.squeezer.rpm_repository:
+        name: test_rpm_repository
+        retain_repo_versions: 5
+        state: present
+      register: result
+    - name: Verify modify retain_repo_versions is 5 in repository
+      assert:
+        that:
+          - result.changed == true
+          - result.repository.retain_repo_versions == 5
+
+    - name: Modify retain_repo_versions to 5 in repository (2nd try)
+      pulp.squeezer.rpm_repository:
+        name: test_rpm_repository
+        retain_repo_versions: 5
+        state: present
+      register: result
+    - name: Verify modify retain_repo_versions to 5 in repository (2nd try)
+      assert:
+        that:
+          - result.changed == false
+
     - name: Fake modify repository
       pulp.squeezer.rpm_repository:
         name: test_rpm_repository

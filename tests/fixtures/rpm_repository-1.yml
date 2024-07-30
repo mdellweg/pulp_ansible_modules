@@ -11,12 +11,12 @@ interactions:
       Host:
       - localhost:8080
       User-Agent:
-      - Python-urllib/3.9
+      - Python-urllib/3.10
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/remotes/rpm/rpm/?limit=1&name=test_rpm_remote
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/rpm/rpm/018f8307-f364-772e-99d8-d7d98185a9d4/","pulp_created":"2024-05-16T20:11:27.461460Z","pulp_last_updated":"2024-05-16T20:11:27.461481Z","name":"test_rpm_remote","url":"https://fixtures.pulpproject.org/rpm-signed/","ca_cert":null,"client_cert":null,"tls_validation":true,"proxy_url":null,"pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"immediate","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":false},{"name":"proxy_username","is_set":false},{"name":"proxy_password","is_set":false},{"name":"username","is_set":false},{"name":"password","is_set":false}],"sles_auth_token":null}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/rpm/rpm/0190f53c-23d5-73c8-8641-e94d3ae6dfa2/","pulp_created":"2024-07-27T17:27:57.654285Z","pulp_last_updated":"2024-07-27T17:27:57.654296Z","name":"test_rpm_remote","url":"https://fixtures.pulpproject.org/rpm-signed/","ca_cert":null,"client_cert":null,"tls_validation":true,"proxy_url":null,"pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"immediate","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":false},{"name":"proxy_username","is_set":false},{"name":"proxy_password","is_set":false},{"name":"username","is_set":false},{"name":"password","is_set":false}],"sles_auth_token":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 7b1b119c608443cba4646afb0848dc30
+      - 6fe2a6ac30124d97809077280f9ded55
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Thu, 16 May 2024 20:11:36 GMT
+      - Sat, 27 Jul 2024 17:28:01 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -59,7 +59,7 @@ interactions:
       Host:
       - localhost:8080
       User-Agent:
-      - Python-urllib/3.9
+      - Python-urllib/3.10
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/repositories/rpm/rpm/?limit=1&name=test_rpm_repository
   response:
@@ -77,11 +77,11 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - ed58d2c33bdb4d5fb2ad0ee292f6f924
+      - c0dc7961f33142f6bfb50baf5ef8d067
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Thu, 16 May 2024 20:11:37 GMT
+      - Sat, 27 Jul 2024 17:28:01 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -96,7 +96,7 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{"name": "test_rpm_repository", "remote": "/pulp/api/v3/remotes/rpm/rpm/018f8307-f364-772e-99d8-d7d98185a9d4/",
+    body: '{"name": "test_rpm_repository", "remote": "/pulp/api/v3/remotes/rpm/rpm/0190f53c-23d5-73c8-8641-e94d3ae6dfa2/",
       "description": null}'
     headers:
       Accept:
@@ -110,12 +110,12 @@ interactions:
       Host:
       - localhost:8080
       User-Agent:
-      - Python-urllib/3.9
+      - Python-urllib/3.10
     method: POST
     uri: http://pulp.example.org/pulp/api/v3/repositories/rpm/rpm/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/","pulp_created":"2024-05-16T20:11:38.120669Z","pulp_last_updated":"2024-05-16T20:11:38.134173Z","versions_href":"/pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/versions/0/","name":"test_rpm_repository","description":null,"retain_repo_versions":null,"remote":"/pulp/api/v3/remotes/rpm/rpm/018f8307-f364-772e-99d8-d7d98185a9d4/","autopublish":false,"metadata_signing_service":null,"retain_package_versions":0,"checksum_type":null,"metadata_checksum_type":null,"package_checksum_type":null,"gpgcheck":null,"repo_gpgcheck":null,"sqlite_metadata":false,"repo_config":{},"compression_type":null}'
+      string: '{"pulp_href":"/pulp/api/v3/repositories/rpm/rpm/0190f53c-351d-732c-b78c-fb4a7b3206ba/","pulp_created":"2024-07-27T17:28:02.079193Z","pulp_last_updated":"2024-07-27T17:28:02.088704Z","versions_href":"/pulp/api/v3/repositories/rpm/rpm/0190f53c-351d-732c-b78c-fb4a7b3206ba/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/rpm/rpm/0190f53c-351d-732c-b78c-fb4a7b3206ba/versions/0/","name":"test_rpm_repository","description":null,"retain_repo_versions":null,"remote":"/pulp/api/v3/remotes/rpm/rpm/0190f53c-23d5-73c8-8641-e94d3ae6dfa2/","autopublish":false,"metadata_signing_service":null,"package_signing_service":null,"package_signing_fingerprint":"","retain_package_versions":0,"checksum_type":null,"metadata_checksum_type":null,"package_checksum_type":null,"gpgcheck":null,"repo_gpgcheck":null,"sqlite_metadata":false,"repo_config":{},"compression_type":null}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -124,17 +124,17 @@ interactions:
       Connection:
       - close
       Content-Length:
-      - '821'
+      - '885'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 21101262aee14f4db76efada70c4a5e8
+      - 27fe8ac081194e328936761d3dfe4d01
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Thu, 16 May 2024 20:11:38 GMT
+      - Sat, 27 Jul 2024 17:28:02 GMT
       Location:
-      - /pulp/api/v3/repositories/rpm/rpm/018f8308-1d06-7339-a2ba-e5f788d08591/
+      - /pulp/api/v3/repositories/rpm/rpm/0190f53c-351d-732c-b78c-fb4a7b3206ba/
       Referrer-Policy:
       - same-origin
       Server:
