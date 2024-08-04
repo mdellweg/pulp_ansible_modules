@@ -16,7 +16,7 @@ interactions:
     uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/?limit=1&name=test_rpm_distribution
   response:
     body:
-      string: '{"count":0,"next":null,"previous":null,"results":[]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/rpm/rpm/01911db2-428a-7b71-8afd-51c1476e4965/","pulp_created":"2024-08-04T14:01:47.402723Z","pulp_last_updated":"2024-08-04T14:01:52.404007Z","base_path":"test_rpm_base_path","base_url":"http://localhost:8080/pulp/content/test_rpm_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/01911db2-3081-78df-9192-1671daccdb67/","hidden":false,"pulp_labels":{"key1":"value1","key2":"value2"},"name":"test_rpm_distribution","repository":"/pulp/api/v3/repositories/rpm/rpm/01911db2-099d-74b3-893f-25d12a603061/","publication":null,"generate_repo_config":true}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -25,15 +25,111 @@ interactions:
       Connection:
       - close
       Content-Length:
-      - '52'
+      - '662'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 04a010677d104316891794300a2f4b01
+      - 85b805d5e7c2461985feb6e13499bc35
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Tue, 05 Mar 2024 13:44:46 GMT
+      - Sun, 04 Aug 2024 14:01:53 GMT
+      Referrer-Policy:
+      - same-origin
+      Server:
+      - nginx/1.22.1
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - close
+      Content-Type:
+      - application/json
+      Host:
+      - localhost:8080
+      User-Agent:
+      - Python-urllib/3.10
+    method: DELETE
+    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/01911db2-428a-7b71-8afd-51c1476e4965/
+  response:
+    body:
+      string: '{"task":"/pulp/api/v3/tasks/01911db2-5c09-7166-908b-999463942022/"}'
+    headers:
+      Access-Control-Expose-Headers:
+      - Correlation-ID
+      Allow:
+      - GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      Connection:
+      - close
+      Content-Length:
+      - '67'
+      Content-Type:
+      - application/json
+      Correlation-ID:
+      - 353cbf52a4e5422a983309b0f7a88726
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Date:
+      - Sun, 04 Aug 2024 14:01:53 GMT
+      Referrer-Policy:
+      - same-origin
+      Server:
+      - nginx/1.22.1
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+    status:
+      code: 202
+      message: Accepted
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - close
+      Content-Type:
+      - application/json
+      Host:
+      - localhost:8080
+      User-Agent:
+      - Python-urllib/3.10
+    method: GET
+    uri: http://pulp.example.org/pulp/api/v3/tasks/01911db2-5c09-7166-908b-999463942022/
+  response:
+    body:
+      string: '{"pulp_href":"/pulp/api/v3/tasks/01911db2-5c09-7166-908b-999463942022/","pulp_created":"2024-08-04T14:01:53.930193Z","pulp_last_updated":"2024-08-04T14:01:53.930204Z","state":"completed","name":"pulpcore.app.tasks.base.general_delete","logging_cid":"353cbf52a4e5422a983309b0f7a88726","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-08-04T14:01:53.947132Z","started_at":"2024-08-04T14:01:53.948307Z","finished_at":"2024-08-04T14:01:53.958133Z","error":null,"worker":null,"parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["pdrn:01911db1-2858-7b72-b5fa-07ffea333219:distributions","shared:prn:core.domain:01911db1-2858-7b72-b5fa-07ffea333219"]}'
+    headers:
+      Access-Control-Expose-Headers:
+      - Correlation-ID
+      Allow:
+      - GET, PATCH, DELETE, HEAD, OPTIONS
+      Connection:
+      - close
+      Content-Length:
+      - '729'
+      Content-Type:
+      - application/json
+      Correlation-ID:
+      - 7932547126944a2fb4fc4787591e4f2c
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Date:
+      - Sun, 04 Aug 2024 14:01:54 GMT
       Referrer-Policy:
       - same-origin
       Server:

@@ -104,6 +104,19 @@
         that:
           - result.changed == false
 
+    - name: Set pulp_label on distribution
+      pulp.squeezer.rpm_distribution:
+        name: test_rpm_distribution
+        base_path: test_rpm_base_path
+        publication: "{{ publication_result.publication.pulp_href }}"
+        state: present
+        pulp_labels: "{ 'key1': 'value1', 'key2': 'value2' }"
+      register: result
+    - name: Verify set pulp_label on distribution
+      assert:
+        that:
+          - result.changed == true
+
     - name: Read distribution
       pulp.squeezer.rpm_distribution:
         name: test_rpm_distribution
@@ -118,6 +131,8 @@
           - result.distribution.publication == publication_result.publication.pulp_href
           - result.distribution.content_guard is regex("/pulp/api/v3/contentguards/*")
           - result.distribution.generate_repo_config == true
+          - result.distribution.pulp_labels.key1 == "value1"
+          - result.distribution.pulp_labels.key2 == "value2"
 
     - name: Distribute repository
       pulp.squeezer.rpm_distribution:
