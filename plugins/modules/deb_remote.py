@@ -23,6 +23,10 @@ options:
     description:
       - Whitespace separated list of distributions to sync.
     type: str
+  gpgkey:
+    description:
+      - gpgkey of remote repository
+    type: str
   policy:
     description:
       - Whether downloads should be performed immediately, or lazy.
@@ -111,6 +115,7 @@ def main():
             "architectures": {},
             "components": {},
             "distributions": {},
+            "gpgkey": {},
             "policy": {"choices": ["immediate", "on_demand", "streamed"]},
             "sync_installer": {"type": "bool"},
             "sync_sources": {"type": "bool"},
@@ -127,6 +132,7 @@ def main():
                 "components",
                 "distributions",
                 "download_concurrency",
+                "gpgkey",
                 "policy",
                 "sync_installer",
                 "sync_sources",
