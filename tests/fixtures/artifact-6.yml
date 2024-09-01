@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.15-dev
+      - Squeezer/0.0.17-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/artifacts/?sha256=fd769b8ec82bc92cc7217dea31e86e68147c160969edb5fccc738a00c968e700&offset=0&limit=1
+    uri: http://pulp.example.org/pulp/api/v3/artifacts/?sha256=6e2424be673cdf7a6861a873020e8c831677bfef124ce52d66eb93667037b39d&offset=0&limit=1
   response:
     body:
-      string: '{"count":0,"next":null,"previous":null,"results":[]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/artifacts/0191acb9-6315-79da-a2d1-61ee396a5d1e/","pulp_created":"2024-09-01T08:35:16.373998Z","pulp_last_updated":"2024-09-01T08:35:16.374011Z","file":"artifact/6e/2424be673cdf7a6861a873020e8c831677bfef124ce52d66eb93667037b39d","size":65,"md5":null,"sha1":null,"sha224":"d47dcd82ce9386f7d2811474dfa86581e6fd9688378690bc49c9ead2","sha256":"6e2424be673cdf7a6861a873020e8c831677bfef124ce52d66eb93667037b39d","sha384":"24124a6e37591497f591bdebe7a99c5248e243ee11dfc6d97df744ed3aa2f9b75e405360d484635a07d15704ced92806","sha512":"4faf576341c327a02d9b7a6ef42240f4c4aa0f2a67177800a8f9748836d3d2ce327dd5e36e17cebe754ca1558a1c663f4c7cd134db021b1d33bbd95814e3d5b9"}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,15 +23,15 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '52'
+      - '732'
       Content-Type:
       - application/json
       Correlation-ID:
-      - e5cfc086cf8c4c9ba4832bb4d7b001c6
+      - e2e46f85112346628642aa554bc70167
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Wed, 28 Feb 2024 13:06:57 GMT
+      - Sun, 01 Sep 2024 08:35:16 GMT
       Referrer-Policy:
       - same-origin
       Server:

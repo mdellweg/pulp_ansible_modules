@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/remotes/ansible/collection/?name=test_ansible_collection_remote&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/ansible/collection/787867e5-211f-4549-b091-f8a83454c8a8/","pulp_created":"2023-05-12T09:19:46.108079Z","name":"test_ansible_collection_remote","url":"https://galaxy-dev.ansible.com/","ca_cert":null,"client_cert":null,"tls_validation":false,"proxy_url":"http://proxy.int:3128","pulp_labels":{},"pulp_last_updated":"2023-05-12T09:19:47.163026Z","download_concurrency":null,"max_retries":null,"policy":"immediate","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":false},{"name":"proxy_username","is_set":false},{"name":"proxy_password","is_set":false},{"name":"username","is_set":false},{"name":"password","is_set":false},{"name":"token","is_set":true}],"requirements_file":"collections:\n  -
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/remotes/ansible/collection/0191990a-bd6f-7847-a24e-0cb560ee804c/","pulp_created":"2024-08-28T12:51:43.599840Z","pulp_last_updated":"2024-08-28T12:51:44.505186Z","name":"test_ansible_collection_remote","url":"https://galaxy-dev.ansible.com/","ca_cert":null,"client_cert":null,"tls_validation":false,"proxy_url":"http://proxy.int:3128","pulp_labels":{},"download_concurrency":null,"max_retries":null,"policy":"immediate","total_timeout":null,"connect_timeout":null,"sock_connect_timeout":null,"sock_read_timeout":null,"headers":null,"rate_limit":null,"hidden_fields":[{"name":"client_key","is_set":false},{"name":"proxy_username","is_set":false},{"name":"proxy_password","is_set":false},{"name":"username","is_set":false},{"name":"password","is_set":false},{"name":"token","is_set":true}],"requirements_file":"collections:\n  -
         pulp.squeezer","auth_url":"https://example.org","sync_dependencies":true,"signed_only":true,"last_sync_task":null}]}'
     headers:
       Access-Control-Expose-Headers:
@@ -28,13 +28,15 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - a8c5ab2b51fd4d789159c34e45ca62e2
+      - 1c82e0b8dae74dc79670a9d867bcd29d
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Fri, 12 May 2023 09:19:48 GMT
+      - Wed, 28 Aug 2024 12:51:45 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

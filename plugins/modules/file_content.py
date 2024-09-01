@@ -21,6 +21,19 @@ options:
     description:
       - Relative path of the file content unit
     type: str
+  file:
+    description:
+      - A path to a file tobe uploaded as the new content unit.
+    type: path
+  chunk_size:
+    description:
+      - Chunk size in bytes used to upload the file.
+    type: int
+    default: 33554432
+  repository:
+    description:
+      - The repository in which the content should be present or absent.
+    type: str
 extends_documentation_fragment:
   - pulp.squeezer.pulp.entity_state
   - pulp.squeezer.pulp.glue
@@ -62,14 +75,19 @@ RETURN = r"""
 """
 
 
+import os
 import traceback
 
-from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpEntityAnsibleModule
+from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import (
+    PulpEntityAnsibleModule,
+    SqueezerException,
+)
 
 try:
-    from pulp_glue.file.context import PulpFileContentContext
+    from pulp_glue.file.context import PulpFileContentContext, PulpFileRepositoryContext
 
     PULP_CLI_IMPORT_ERR = None
+
 except ImportError:
     PULP_CLI_IMPORT_ERR = traceback.format_exc()
     PulpFileContentContext = None
@@ -84,19 +102,47 @@ def main():
         argument_spec={
             "sha256": {"aliases": ["digest"]},
             "relative_path": {},
+            "file": {"type": "path"},
+            "chunk_size": {"type": "int", "default": 33554432},
+            "repository": {},
         },
         required_if=[
-            ("state", "present", ["sha256", "relative_path"]),
-            ("state", "absent", ["sha256", "relative_path"]),
+            ("state", "present", ["file", "relative_path", "repository"]),
+            ("state", "absent", ["relative_path", "repository"]),
         ],
     ) as module:
+        sha256 = module.params["sha256"]
+        if module.params["file"]:
+            if not os.path.exists(module.params["file"]):
+                raise SqueezerException("File not found.")
+            file_sha256 = module.sha256(module.params["file"])
+            if sha256:
+                if sha256 != file_sha256:
+                    raise SqueezerException("File checksum mismatch.")
+            else:
+                sha256 = file_sha256
+
+        if sha256 is None and module.state == "absent":
+            raise SqueezerException(
+                "One of 'file' and 'sha256' is required if 'state' is 'absent'."
+            )
+
         natural_key = {
-            "sha256": module.params["sha256"],
+            "sha256": sha256,
             "relative_path": module.params["relative_path"],
         }
         desired_attributes = {}
+        defaults = {
+            "file": module.params["file"],
+            "chunk_size": module.params["chunk_size"],
+        }
 
-        module.process(natural_key, desired_attributes)
+        if module.params["repository"]:
+            module.context.repository_ctx = PulpFileRepositoryContext(
+                module.pulp_ctx, entity={"name": module.params["repository"]}
+            )
+
+        module.process(natural_key, desired_attributes, defaults=defaults)
 
 
 if __name__ == "__main__":

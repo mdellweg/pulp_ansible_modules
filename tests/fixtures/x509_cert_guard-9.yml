@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/contentguards/certguard/x509/?name=test_x509_cert_guard&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/contentguards/certguard/x509/af426845-6ab5-40ae-ad38-3bddd63cfb8d/","pulp_created":"2023-04-07T13:46:56.575754Z","name":"test_x509_cert_guard","description":null,"ca_certificate":"-----BEGIN
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/contentguards/certguard/x509/0191990b-8272-7ae6-a40e-f56383678ebf/","pulp_created":"2024-08-28T12:52:34.034872Z","pulp_last_updated":"2024-08-28T12:52:37.023383Z","name":"test_x509_cert_guard","description":null,"ca_certificate":"-----BEGIN
         CERTIFICATE-----\nMIICrTCCAZUCFAp0n3Mrg78x+8rAn8x1EGxVhKYrMA0GCSqGSIb3DQEBBQUAMBMx\nETAPBgNVBAMMCHNuYWtlb2lsMB4XDTIwMDcyMjE5MDUwNFoXDTIwMDgyMTE5MDUw\nNFowEzERMA8GA1UEAwwIc25ha2VvaWwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw\nggEKAoIBAQDKIwKvUax3A/5dODykWzJm0RWjnQAcxfuLbaZcPVDEo/Q8lBkaLEDl\nURAm8e9/uLJjcMyjl2LLlsJYOlcqbjNSwf/5D693IcTRO53C1xWvZ+IGGokweY0m\n8G3SFf5BKmji1OmT8l7iA35Wg0ist/QemQIaSV+n0B/yArdbkfcedPoiudzLOmx6\nEwSCdu9Xl4g29zLzBOWCHuZ0ghNbSWu0cQbkm1syM993BIH31bKdjImUTVg1HlqV\nxi1Y9EVQ3fFE/00DYsgANvSHa3YZsLCgl6gzab5repKP96vjX34JsZi1ayJXXYBz\ncjQPG0e9gpoqHROmKNJj+Up7lySrmSuLAgMBAAEwDQYJKoZIhvcNAQEFBQADggEB\nAI7zqZRPIWdbPWUKFZJNF6GsaBpLR0RkgukPo7vOF5WhOwez2fL+gsh5cffmcTyX\nEOkE53mHkI8z0yg+GtfOqv4GsUJe3VquoFvNYXAVZNGP/p6FFnihIymGbRFHGZSP\ns7g0yVwuI65VkaROtE7YI1pp7y8dPpvkQqAiZvUCC8cYIwYxavZLArVoRiilXz/f\nfuJoP99TyE3mRbLYamvrGDqLGMO8I4JAfgUbaiEEj5nJsUxWkhliSvWPjXuvytsy\nRlL+GSgPFNqTQ1eLKb4boTgM84ngSMeT47BZn2nipFg78ChwU8GOJ7G3sPYjKhIp\nRyEremCPzDNgO6asTRhn9ro=\n-----END
         CERTIFICATE-----"}]}'
     headers:
@@ -25,19 +25,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '1265'
+      - '1315'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 0d78569a319549c98498b13495218ff1
+      - e332ed5ceb6f44458d27c34796c82a20
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Fri, 07 Apr 2023 13:47:02 GMT
+      - Wed, 28 Aug 2024 12:52:37 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -57,11 +59,11 @@ interactions:
       Content-Length:
       - '0'
       Correlation-ID:
-      - 0d78569a319549c98498b13495218ff1
+      - e332ed5ceb6f44458d27c34796c82a20
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: DELETE
-    uri: http://pulp.example.org/pulp/api/v3/contentguards/certguard/x509/af426845-6ab5-40ae-ad38-3bddd63cfb8d/
+    uri: http://pulp.example.org/pulp/api/v3/contentguards/certguard/x509/0191990b-8272-7ae6-a40e-f56383678ebf/
   response:
     body:
       string: ''
@@ -75,15 +77,17 @@ interactions:
       Content-Length:
       - '0'
       Correlation-ID:
-      - 0d78569a319549c98498b13495218ff1
+      - e332ed5ceb6f44458d27c34796c82a20
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Fri, 07 Apr 2023 13:47:02 GMT
+      - Wed, 28 Aug 2024 12:52:37 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:

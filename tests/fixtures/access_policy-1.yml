@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/access_policies/?viewset_name=tasks&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/access_policies/d712f2d0-f2d3-423f-bfdc-8114729a3082/","pulp_created":"2023-03-30T15:27:59.472793Z","permissions_assignment":[{"function":"add_roles_for_object_creator","parameters":{"roles":"core.task_owner"},"permissions":null}],"creation_hooks":[{"function":"add_roles_for_object_creator","parameters":{"roles":"core.task_owner"},"permissions":null}],"statements":[{"action":["list"],"effect":"allow","principal":"authenticated"},{"action":["retrieve","my_permissions"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.view_task","principal":"authenticated"},{"action":["destroy"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.delete_task","principal":"authenticated"},{"action":["update","partial_update"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.change_task","principal":"authenticated"},{"action":["purge"],"effect":"allow","principal":"authenticated"},{"action":["list_roles","add_role","remove_role"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.manage_roles_task","principal":"authenticated"}],"viewset_name":"tasks","customized":true,"queryset_scoping":{"function":"scope_queryset"}}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/access_policies/c57a9dca-3213-443b-8287-838034c5d239/","pulp_created":"2024-08-27T07:46:20.142150Z","pulp_last_updated":"2024-08-28T12:24:15.909555Z","permissions_assignment":[{"function":"add_roles_for_object_creator","parameters":{"roles":"core.task_owner"},"permissions":null}],"creation_hooks":[{"function":"add_roles_for_object_creator","parameters":{"roles":"core.task_owner"},"permissions":null}],"statements":[{"action":["list"],"effect":"allow","principal":"authenticated"},{"action":["retrieve","my_permissions"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.view_task","principal":"authenticated"},{"action":["profile_artifacts"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.view_task_profile_artifacts","principal":"authenticated"},{"action":["destroy"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.delete_task","principal":"authenticated"},{"action":["update","partial_update"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.change_task","principal":"authenticated"},{"action":["purge"],"effect":"allow","principal":"authenticated"},{"action":["list_roles","add_role","remove_role"],"effect":"allow","condition":"has_model_or_domain_or_obj_perms:core.manage_roles_task","principal":"authenticated"}],"viewset_name":"tasks","customized":true,"queryset_scoping":{"function":"scope_queryset"}}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,19 +23,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '1263'
+      - '1471'
       Content-Type:
       - application/json
       Correlation-ID:
-      - a41c978cf52f4a8fa3a826f700b799a8
+      - 2528db19eeb74780ae4fd5667a4dd0b3
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Sat, 08 Apr 2023 11:16:29 GMT
+      - Wed, 28 Aug 2024 12:49:35 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:

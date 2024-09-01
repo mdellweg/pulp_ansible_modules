@@ -14,9 +14,10 @@ try:
     from packaging.requirements import SpecifierSet
     from pulp_glue.common import __version__ as pulp_glue_version
     from pulp_glue.common.context import PulpContext, PulpException, PulpNoWait
+    from pulp_glue.common.openapi import BasicAuthProvider
 
-    GLUE_VERSION_SPEC = ">=0.20.0,<0.27"
-    if not SpecifierSet(GLUE_VERSION_SPEC).contains(pulp_glue_version):
+    GLUE_VERSION_SPEC = ">=0.28.0,<0.29.0"
+    if not SpecifierSet(GLUE_VERSION_SPEC, prereleases=True).contains(pulp_glue_version):
         raise ImportError(
             f"Installed 'pulp-glue' version '{pulp_glue_version}' is not in '{GLUE_VERSION_SPEC}'."
         )
@@ -86,17 +87,11 @@ class PulpAnsibleModule(AnsibleModule):
                 self.fail_json(msg=missing_required_lib(import_error[0]), exception=import_error[1])
 
         auth_args = {}
-        if SpecifierSet(">=0.24.0").contains(pulp_glue_version):
-            if self.params["username"]:
-                from pulp_glue.common.openapi import BasicAuthProvider
-
-                auth_args["auth_provider"] = BasicAuthProvider(
-                    username=self.params["username"],
-                    password=self.params["password"],
-                )
-        else:
-            auth_args["username"] = self.params["username"]
-            auth_args["password"] = self.params["password"]
+        if self.params["username"]:
+            auth_args["auth_provider"] = BasicAuthProvider(
+                username=self.params["username"],
+                password=self.params["password"],
+            )
 
         self.pulp_ctx = PulpSqueezerContext(
             api_root="/pulp/",
@@ -106,22 +101,28 @@ class PulpAnsibleModule(AnsibleModule):
                 key=self.params["user_key"],
                 validate_certs=self.params["validate_certs"],
                 refresh_cache=self.params["refresh_api_cache"],
-                safe_calls_only=self.check_mode,
                 user_agent=f"Squeezer/{__VERSION__}",
                 **auth_args,
             ),
             background_tasks=False,
             timeout=self.params["timeout"],
+            fake_mode=self.check_mode,  # This sets api_kwargs["safe_calls_only"] for us.
         )
 
     def __enter__(self):
         self._changed = False
         self._results = {}
+        self._diff_states = []
 
         return self
 
     def __exit__(self, exc_class, exc_value, tb):
         if exc_class is None:
+            if self._diff_states:
+                self._results["diff"] = {
+                    "before": self._diff_states[0],
+                    "after": self._diff_states[-1],
+                }
             self.exit_json(changed=self._changed, **self._results)
         else:
             if issubclass(exc_class, (PulpException, PulpNoWait, SqueezerException)):
@@ -141,6 +142,9 @@ class PulpAnsibleModule(AnsibleModule):
     def set_result(self, key, value):
         self._results[key] = value
 
+    def record_diff_state(self, value):
+        self._diff_states.append(value)
+
 
 class PulpEntityAnsibleModule(PulpAnsibleModule):
     def __init__(self, context_class, entity_singular, entity_plural, **kwargs):
@@ -152,6 +156,7 @@ class PulpEntityAnsibleModule(PulpAnsibleModule):
         argument_spec.update(kwargs.pop("argument_spec", {}))
         super().__init__(argument_spec=argument_spec, **kwargs)
         self.state = self.params["state"]
+
         self.context = context_class(self.pulp_ctx)
         self.entity_singular = entity_singular
         self.entity_plural = entity_plural
@@ -162,59 +167,56 @@ class PulpEntityAnsibleModule(PulpAnsibleModule):
             for key, value in entity.items()
         }
 
-    def process(self, natural_key, desired_attributes):
-        if None not in natural_key.values():
-            if "pulp_href" in natural_key:
-                self.context.pulp_href = natural_key["pulp_href"]
-            else:
-                self.context.entity = natural_key
-            try:
-                entity = self.represent(self.context.entity)
-            except PulpException:
-                entity = None
-            if self.state is None:
-                pass
-            elif self.state == "absent":
-                if entity is not None:
-                    if not self.check_mode:
-                        self.context.delete()
-                    entity = None
-                    self.set_changed()
-            elif self.state == "present":
-                entity = self.process_present(entity, natural_key, desired_attributes)
-            else:
-                entity = self.process_special(entity, natural_key, desired_attributes)
-            self.set_result(self.entity_singular, entity)
+    def process(self, natural_key, desired_attributes, defaults=None):
+        if self.state is None:
+            return self.process_info(natural_key, desired_attributes)
+
+        if "pulp_href" in natural_key:
+            self.context.pulp_href = natural_key["pulp_href"]
         else:
-            if self.state is not None:
-                raise SqueezerException(f"Invalid state '{self.state}' for entity listing.")
+            if None in natural_key.values():
+                raise SqueezerException("Insufficient information to identify the entity.")
+            self.context.entity = natural_key
+
+        if self.state == "present":
+            desired_entity = desired_attributes
+        elif self.state == "absent":
+            desired_entity = None
+        else:
+            self.set_result(
+                self.entity_singular,
+                self.process_special(desired_attributes, defaults=defaults),
+            )
+            return
+        changed, before, after = self.context.converge(desired_entity, defaults=defaults)
+        if before is not None:
+            before = self.represent(before)
+        if after is not None:
+            after = self.represent(after)
+        if changed:
+            self.set_changed()
+            self.record_diff_state(before)
+            self.record_diff_state(after)
+        self.set_result(self.entity_singular, after)
+
+    def process_info(self, natural_key, desired_attributes):
+        if any((value is not None for value in desired_attributes.values())):
+            raise SqueezerException("Cannot use attributes when querying entities.")
+        # TODO turn this into a filtering query instead
+        if None in natural_key.values():
             entities = [
                 self.represent(entity)
                 for entity in self.context.list(limit=-1, offset=0, parameters={})
             ]
             self.set_result(self.entity_plural, entities)
-
-    def process_present(self, entity, natural_key, desired_attributes):
-        if entity is None:
-            entity = {**desired_attributes, **natural_key}
-            if not self.check_mode:
-                self.context.create(body=entity)
-                entity = self.context.entity
-            entity = self.represent(entity)
-            self.set_changed()
         else:
-            updated_attributes = {k: v for k, v in desired_attributes.items() if entity.get(k) != v}
-            if updated_attributes:
-                if not self.check_mode:
-                    self.context.update(body=updated_attributes)
-                    entity = self.context.entity
-                else:
-                    entity.update(updated_attributes)
-                entity = self.represent(entity)
-                self.set_changed()
-        return entity
+            if "pulp_href" in natural_key:
+                self.context.pulp_href = natural_key["pulp_href"]
+            else:
+                self.context.entity = natural_key
+            self.set_result(self.entity_singular, self.represent(self.context.entity))
 
-    def process_special(self, entity, natural_key, desired_attributes):
+    def process_special(self, entity, natural_key, desired_attributes, defaults=None):
         raise SqueezerException(f"Invalid state '{self.state}'.")
 
 

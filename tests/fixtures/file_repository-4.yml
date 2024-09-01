@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/?name=test_file_repository&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/","pulp_created":"2022-12-08T13:33:46.345117Z","versions_href":"/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/versions/0/","name":"test_file_repository","description":"repository
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/","pulp_created":"2024-08-28T12:54:15.387284Z","pulp_last_updated":"2024-08-28T12:54:16.970629Z","versions_href":"/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/versions/0/","name":"test_file_repository","description":"repository
         created via ansible","retain_repo_versions":null,"remote":null,"autopublish":false,"manifest":"PULP_MANIFEST"}]}'
     headers:
       Access-Control-Expose-Headers:
@@ -24,19 +24,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '579'
+      - '629'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 6d2a6eda091640fcb0f3b6835c7257ee
+      - 71290f8ff4f14d4689561ce5dfb26dd2
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:33:50 GMT
+      - Wed, 28 Aug 2024 12:54:18 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:

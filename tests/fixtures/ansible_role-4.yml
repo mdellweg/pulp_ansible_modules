@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/content/ansible/roles/?name=test_ansible_role&namespace=test_namespace&version=0.0.0&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"artifact":"/pulp/api/v3/artifacts/7b8cb3c7-e1cf-42c7-9f3b-7f7c8f4cd4b9/","pulp_href":"/pulp/api/v3/content/ansible/roles/9c79877c-7ff2-445d-a369-2aff6a6cbd91/","pulp_created":"2023-05-15T17:04:17.538903Z","version":"0.0.0","name":"test_ansible_role","namespace":"test_namespace"}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/content/ansible/roles/0191990c-8d8a-7e5e-a311-a9d7fdf6cc99/","pulp_created":"2024-08-28T12:53:42.411094Z","artifact":"/pulp/api/v3/artifacts/0191990c-7750-7405-978a-9a226083d3e7/","pulp_last_updated":"2024-08-28T12:53:42.411115Z","version":"0.0.0","name":"test_ansible_role","namespace":"test_namespace"}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,17 +23,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '333'
+      - '383'
       Content-Type:
       - application/json
       Correlation-ID:
-      - e3fd2f2c39c74270a87417f293bed6fc
+      - 7faa3a7539604ad5b8591aab2144aed4
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Mon, 15 May 2023 17:04:19 GMT
+      - Wed, 28 Aug 2024 12:53:45 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
       - Accept
       X-Content-Type-Options:

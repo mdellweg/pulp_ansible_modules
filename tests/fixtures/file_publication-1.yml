@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/?name=test_file_repository&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/file/file/2dd12a7e-c7da-42e5-91f3-4454a67c6a95/","pulp_created":"2022-12-08T13:07:03.865114Z","versions_href":"/pulp/api/v3/repositories/file/file/2dd12a7e-c7da-42e5-91f3-4454a67c6a95/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/file/file/2dd12a7e-c7da-42e5-91f3-4454a67c6a95/versions/1/","name":"test_file_repository","description":null,"retain_repo_versions":null,"remote":null,"autopublish":false,"manifest":"PULP_MANIFEST"}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/file/file/01919914-64d3-7545-b6d1-f78e4a8b27e3/","pulp_created":"2024-08-28T13:02:16.276033Z","pulp_last_updated":"2024-08-28T13:02:24.215753Z","versions_href":"/pulp/api/v3/repositories/file/file/01919914-64d3-7545-b6d1-f78e4a8b27e3/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/file/file/01919914-64d3-7545-b6d1-f78e4a8b27e3/versions/1/","name":"test_file_repository","description":null,"retain_repo_versions":null,"remote":null,"autopublish":false,"manifest":"PULP_MANIFEST"}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,19 +23,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '551'
+      - '601'
       Content-Type:
       - application/json
       Correlation-ID:
-      - d3ba2873d4ae4219b96d21e505ff1b64
+      - 552628a61336420481e8fb5730f0df1c
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:07:15 GMT
+      - Wed, 28 Aug 2024 13:02:29 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -53,14 +55,14 @@ interactions:
       Connection:
       - keep-alive
       Correlation-ID:
-      - d3ba2873d4ae4219b96d21e505ff1b64
+      - 552628a61336420481e8fb5730f0df1c
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/publications/file/file/?repository_version=%2Fpulp%2Fapi%2Fv3%2Frepositories%2Ffile%2Ffile%2F2dd12a7e-c7da-42e5-91f3-4454a67c6a95%2Fversions%2F1%2F&offset=0&limit=1
+    uri: http://pulp.example.org/pulp/api/v3/publications/file/file/?repository_version=%2Fpulp%2Fapi%2Fv3%2Frepositories%2Ffile%2Ffile%2F01919914-64d3-7545-b6d1-f78e4a8b27e3%2Fversions%2F1%2F&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/publications/file/file/82060b38-d9d3-418d-ba7c-a5db5938a281/","pulp_created":"2022-12-08T13:07:12.433449Z","repository_version":"/pulp/api/v3/repositories/file/file/2dd12a7e-c7da-42e5-91f3-4454a67c6a95/versions/1/","repository":"/pulp/api/v3/repositories/file/file/2dd12a7e-c7da-42e5-91f3-4454a67c6a95/","distributions":[],"manifest":"PULP_MANIFEST"}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/publications/file/file/01919914-9591-7410-bbd9-e0679d0b6408/","pulp_created":"2024-08-28T13:02:28.754850Z","pulp_last_updated":"2024-08-28T13:02:28.788708Z","repository_version":"/pulp/api/v3/repositories/file/file/01919914-64d3-7545-b6d1-f78e4a8b27e3/versions/1/","repository":"/pulp/api/v3/repositories/file/file/01919914-64d3-7545-b6d1-f78e4a8b27e3/","distributions":[],"manifest":"PULP_MANIFEST"}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -69,19 +71,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '429'
+      - '479'
       Content-Type:
       - application/json
       Correlation-ID:
-      - d3ba2873d4ae4219b96d21e505ff1b64
+      - 552628a61336420481e8fb5730f0df1c
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:07:15 GMT
+      - Wed, 28 Aug 2024 13:02:29 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:

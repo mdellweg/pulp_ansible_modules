@@ -62,6 +62,7 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import (
 )
 
 try:
+    from pulp_glue.common.context import PulpEntityNotFound
     from pulp_glue.core.context import PulpTaskContext
 
     PULP_CLI_IMPORT_ERR = None
@@ -71,10 +72,12 @@ except ImportError:
 
 
 class PulpTaskAnsibleModule(PulpEntityAnsibleModule):
-    def process_special(self, entity, natural_key, desired_attributes):
+    def process_special(self, desired_attributes, defaults=None):
         if self.state in ["canceled", "completed"]:
-            if entity is None:
-                raise SqueezerException("Entity not found.")
+            try:
+                entity = self.context.entity
+            except PulpEntityNotFound:
+                raise SqueezerException("Task not found.")
             if entity["state"] in ["waiting", "running", "canceling"]:
                 if not self.check_mode:
                     if self.state == "canceled":
@@ -86,7 +89,7 @@ class PulpTaskAnsibleModule(PulpEntityAnsibleModule):
                     entity["state"] = self.state
                 self.set_changed()
             return entity
-        return super().process_special(entity, natural_key, desired_attributes)
+        return super().process_special(entity, desired_attributes, defaults)
 
 
 def main():

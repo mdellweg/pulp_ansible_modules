@@ -89,31 +89,56 @@ from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import (
 )
 
 try:
-    from pulp_glue.core.context import PulpArtifactContext
+    from pulp_glue.common.context import PulpEntityNotFound
+    from pulp_glue.core.context import PulpArtifactContext as _PulpArtifactContext
 
     PULP_CLI_IMPORT_ERR = None
+
+    # Patch the Context to make converge call upload
+    # It's a case study at this point. Eventually glue should handle this.
+    class PulpArtifactContext(_PulpArtifactContext):
+        def converge(self, desired_attributes, defaults=None):
+            """
+            Converge an entity to have a set of desired attributes.
+
+            This will look for the entity, and depending on what it found and what should be, create,
+            delete or update the entity.
+
+            Parameters:
+                desired_attributes: Dictionary of attributes the entity should have.
+
+            Returns:
+                Tuple of (changed, before, after)
+            """
+            try:
+                entity = self.entity
+            except PulpEntityNotFound:
+                entity = None
+
+            if desired_attributes is None:
+                if entity is not None:
+                    # raise SqueezerException("Artifacts cannot be deleted")
+                    self.delete()
+                    return True, entity, None
+            else:
+                if entity is None:
+                    # This is being quite different:
+                    with open(defaults["file"], "rb") as file:
+                        self.upload(
+                            file=file,
+                            chunk_size=defaults["chunk_size"],
+                            sha256=self._entity_lookup["sha256"],
+                        )
+                    return True, None, self.entity
+            return False, entity, entity
+
 except ImportError:
     PULP_CLI_IMPORT_ERR = traceback.format_exc()
     PulpArtifactContext = None
 
 
-class PulpArtifactAnsibleModule(PulpEntityAnsibleModule):
-    def process_present(self, entity, natural_key, desired_attributes):
-        if entity is None:
-            if self.check_mode:
-                entity = {**desired_attributes, **natural_key}
-            else:
-                with open(self.params["file"], "rb") as infile:
-                    self.context.upload(
-                        infile, sha256=natural_key["sha256"], chunk_size=self.params["chunk_size"]
-                    )
-                entity = self.context.entity
-            self.set_changed()
-        return self.represent(entity)
-
-
 def main():
-    with PulpArtifactAnsibleModule(
+    with PulpEntityAnsibleModule(
         context_class=PulpArtifactContext,
         entity_singular="artifact",
         entity_plural="artifacts",
@@ -144,8 +169,13 @@ def main():
         natural_key = {
             "sha256": sha256,
         }
+        desired_attributes = {}
+        defaults = {
+            "file": module.params["file"],
+            "chunk_size": module.params["chunk_size"],
+        }
 
-        module.process(natural_key, {})
+        module.process(natural_key, desired_attributes, defaults=defaults)
 
 
 if __name__ == "__main__":

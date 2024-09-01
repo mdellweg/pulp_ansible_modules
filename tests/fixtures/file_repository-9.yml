@@ -9,12 +9,12 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/?name=test_file_repository&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/","pulp_created":"2022-12-08T13:33:46.345117Z","versions_href":"/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/versions/0/","name":"test_file_repository","description":null,"retain_repo_versions":null,"remote":null,"autopublish":false,"manifest":"PULP_MANIFEST"}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/","pulp_created":"2024-08-28T12:54:15.387284Z","pulp_last_updated":"2024-08-28T12:54:22.086968Z","versions_href":"/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/versions/0/","name":"test_file_repository","description":null,"retain_repo_versions":null,"remote":null,"autopublish":false,"manifest":"PULP_MANIFEST"}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -23,19 +23,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '551'
+      - '601'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65b040b32b5b4cdcb4f1fa80d4074460
+      - 6179c8d8d0e4451da941afb74bed8b64
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:33:53 GMT
+      - Wed, 28 Aug 2024 12:54:24 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -55,14 +57,14 @@ interactions:
       Content-Length:
       - '0'
       Correlation-ID:
-      - 65b040b32b5b4cdcb4f1fa80d4074460
+      - 6179c8d8d0e4451da941afb74bed8b64
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: DELETE
-    uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/
+    uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/0191990d-0e5a-7f2b-b6a1-e445207c3c5a/
   response:
     body:
-      string: '{"task":"/pulp/api/v3/tasks/b9a73e55-38e7-40f4-8db4-fe010f506f06/"}'
+      string: '{"task":"/pulp/api/v3/tasks/0191990d-3140-71f9-9121-4eca7e59c560/"}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -75,15 +77,17 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65b040b32b5b4cdcb4f1fa80d4074460
+      - 6179c8d8d0e4451da941afb74bed8b64
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:33:53 GMT
+      - Wed, 28 Aug 2024 12:54:24 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
@@ -101,14 +105,14 @@ interactions:
       Connection:
       - keep-alive
       Correlation-ID:
-      - 65b040b32b5b4cdcb4f1fa80d4074460
+      - 6179c8d8d0e4451da941afb74bed8b64
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/tasks/b9a73e55-38e7-40f4-8db4-fe010f506f06/
+    uri: http://pulp.example.org/pulp/api/v3/tasks/0191990d-3140-71f9-9121-4eca7e59c560/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/tasks/b9a73e55-38e7-40f4-8db4-fe010f506f06/","pulp_created":"2022-12-08T13:33:53.753871Z","state":"completed","name":"pulpcore.app.tasks.base.general_delete","logging_cid":"65b040b32b5b4cdcb4f1fa80d4074460","started_at":"2022-12-08T13:33:53.785474Z","finished_at":"2022-12-08T13:33:53.825939Z","error":null,"worker":"/pulp/api/v3/workers/9f3060a6-fe8c-4f5f-8d60-0da5bf318aba/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["/pulp/api/v3/repositories/file/file/ac9f89b2-5c13-4bee-b593-817f11491b1b/"]}'
+      string: '{"pulp_href":"/pulp/api/v3/tasks/0191990d-3140-71f9-9121-4eca7e59c560/","pulp_created":"2024-08-28T12:54:24.321436Z","pulp_last_updated":"2024-08-28T12:54:24.321454Z","state":"completed","name":"pulpcore.app.tasks.base.general_delete","logging_cid":"6179c8d8d0e4451da941afb74bed8b64","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-08-28T12:54:24.341964Z","started_at":"2024-08-28T12:54:24.400269Z","finished_at":"2024-08-28T12:54:24.475254Z","error":null,"worker":"/pulp/api/v3/workers/019192cd-a16a-740f-9c1f-b736326f8e52/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["prn:file.filerepository:0191990d-0e5a-7f2b-b6a1-e445207c3c5a","shared:prn:core.domain:019192cc-cf85-7342-bd0e-2c2a7d3a272e"]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
@@ -117,19 +121,21 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '609'
+      - '790'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 65b040b32b5b4cdcb4f1fa80d4074460
+      - 6179c8d8d0e4451da941afb74bed8b64
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 08 Dec 2022 13:33:53 GMT
+      - Wed, 28 Aug 2024 12:54:24 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:

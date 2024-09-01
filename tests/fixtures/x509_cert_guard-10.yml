@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Squeezer/0.0.14-dev
+      - Squeezer/0.0.17-dev
     method: GET
     uri: http://pulp.example.org/pulp/api/v3/contentguards/certguard/x509/?name=test_x509_cert_guard&offset=0&limit=1
   response:
@@ -27,15 +27,17 @@ interactions:
       Content-Type:
       - application/json
       Correlation-ID:
-      - e3df0f1dbb9549fc954b22e55c5dca7b
+      - 2eca5569055c406e9d99bf3ea0f84c03
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Fri, 07 Apr 2023 13:47:03 GMT
+      - Wed, 28 Aug 2024 12:52:38 GMT
       Referrer-Policy:
       - same-origin
       Server:
-      - nginx/1.14.1
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
