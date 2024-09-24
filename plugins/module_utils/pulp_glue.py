@@ -39,7 +39,7 @@ class SqueezerException(Exception):
     pass
 
 
-__VERSION__ = "0.0.17"
+__VERSION__ = "0.0.18-dev"
 
 
 class PulpAnsibleModule(AnsibleModule):
