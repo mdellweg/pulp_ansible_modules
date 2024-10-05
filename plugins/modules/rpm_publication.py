@@ -22,8 +22,9 @@ options:
     type: int
     required: false
 extends_documentation_fragment:
-  - pulp.squeezer.pulp
   - pulp.squeezer.pulp.entity_state
+  - pulp.squeezer.pulp.glue
+  - pulp.squeezer.pulp
 author:
   - Jacob Floyd (@cognifloyd)
 """
@@ -68,15 +69,25 @@ RETURN = r"""
 """
 
 
-from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
-    PulpEntityAnsibleModule,
-    PulpRpmPublication,
-    PulpRpmRepository,
-)
+import traceback
+
+from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpEntityAnsibleModule
+
+try:
+    from pulp_glue.rpm.context import PulpRpmPublicationContext, PulpRpmRepositoryContext
+
+    PULP_CLI_IMPORT_ERR = None
+except ImportError:
+    PULP_CLI_IMPORT_ERR = traceback.format_exc()
+    PulpRpmPublicationContext = None
 
 
 def main():
     with PulpEntityAnsibleModule(
+        context_class=PulpRpmPublicationContext,
+        entity_singular="publication",
+        entity_plural="publications",
+        import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
         argument_spec={
             "repository": {},
             "version": {"type": "int"},
@@ -91,20 +102,21 @@ def main():
         desired_attributes = {}
 
         if repository_name:
-            repository = PulpRpmRepository(module, {"name": repository_name})
-            repository.find(failsafe=False)
+            repository_ctx = PulpRpmRepositoryContext(
+                module.pulp_ctx, entity={"name": repository_name}
+            )
             # TODO check if version exists
             if version:
-                repository_version_href = repository.entity["versions_href"] + "{version}/".format(
-                    version=version
-                )
+                repository_version_href = repository_ctx.entity[
+                    "versions_href"
+                ] + "{version}/".format(version=version)
             else:
-                repository_version_href = repository.entity["latest_version_href"]
+                repository_version_href = repository_ctx.entity["latest_version_href"]
             natural_key = {"repository_version": repository_version_href}
         else:
             natural_key = {"repository_version": None}
 
-        PulpRpmPublication(module, natural_key, desired_attributes).process()
+        module.process(natural_key, desired_attributes)
 
 
 if __name__ == "__main__":

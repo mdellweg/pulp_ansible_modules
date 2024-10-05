@@ -16,7 +16,7 @@ try:
     from pulp_glue.common.context import PulpContext, PulpException, PulpNoWait
     from pulp_glue.common.openapi import BasicAuthProvider
 
-    GLUE_VERSION_SPEC = ">=0.28.0,<0.30"
+    GLUE_VERSION_SPEC = ">=0.29.2,<0.30"
     if not SpecifierSet(GLUE_VERSION_SPEC, prereleases=True).contains(pulp_glue_version):
         raise ImportError(
             f"Installed 'pulp-glue' version '{pulp_glue_version}' is not in '{GLUE_VERSION_SPEC}'."
@@ -25,14 +25,6 @@ try:
     PULP_CLI_IMPORT_ERR = None
 except ImportError:
     PULP_CLI_IMPORT_ERR = traceback.format_exc()
-else:
-
-    class PulpSqueezerContext(PulpContext):
-        def prompt(self, *args, **kwargs):
-            pass
-
-        def echo(self, *args, **kwargs):
-            pass
 
 
 class SqueezerException(Exception):
@@ -93,7 +85,7 @@ class PulpAnsibleModule(AnsibleModule):
                 password=self.params["password"],
             )
 
-        self.pulp_ctx = PulpSqueezerContext(
+        self.pulp_ctx = PulpContext(
             api_root="/pulp/",
             api_kwargs=dict(
                 base_url=self.params["pulp_url"],

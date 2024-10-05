@@ -4,36 +4,34 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - localhost:8080
+      - keep-alive
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/contentguards/?limit=1&name=test_content_guard
+    uri: http://pulp.example.org/pulp/api/v3/contentguards/?name=test_content_guard&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/contentguards/certguard/x509/01911db2-3081-78df-9192-1671daccdb67/","pulp_created":"2024-08-04T14:01:42.785918Z","pulp_last_updated":"2024-08-04T14:01:42.785929Z","name":"test_content_guard","description":null}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/contentguards/certguard/x509/0192614c-6da4-7f7c-9947-23f4d8dc8445/","pulp_created":"2024-10-06T10:07:31.748706Z","pulp_last_updated":"2024-10-06T10:07:31.748717Z","name":"test_content_guard","description":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '289'
       Content-Type:
       - application/json
       Correlation-ID:
-      - c72ff3c044ae426288bc739ebdb76fe6
+      - 7e619a802a094742bc43c69b2654489b
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:46 GMT
+      - Sun, 06 Oct 2024 10:07:35 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -52,16 +50,16 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - localhost:8080
+      - keep-alive
+      Correlation-ID:
+      - 7e619a802a094742bc43c69b2654489b
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/?limit=1&name=test_rpm_distribution
+    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/?name=test_rpm_distribution&offset=0&limit=1
   response:
     body:
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
@@ -71,17 +69,17 @@ interactions:
       Allow:
       - GET, POST, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '52'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 393e98ccc93e4f3bb5a5755d28604348
+      - 7e619a802a094742bc43c69b2654489b
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:47 GMT
+      - Sun, 06 Oct 2024 10:07:35 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -96,44 +94,47 @@ interactions:
       code: 200
       message: OK
 - request:
-    body: '{"name": "test_rpm_distribution", "base_path": "test_rpm_base_path", "generate_repo_config":
-      true, "publication": "/pulp/api/v3/publications/rpm/rpm/01911db2-1c05-7736-9927-0e669574c1aa/",
-      "repository": null, "content_guard": "/pulp/api/v3/contentguards/certguard/x509/01911db2-3081-78df-9192-1671daccdb67/"}'
+    body: '{"base_path": "test_rpm_base_path", "generate_repo_config": true, "publication":
+      "/pulp/api/v3/publications/rpm/rpm/0192614c-663a-74ab-a81b-9906d511a973/", "content_guard":
+      "/pulp/api/v3/contentguards/certguard/x509/0192614c-6da4-7f7c-9947-23f4d8dc8445/",
+      "name": "test_rpm_distribution", "repository": null}'
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
+      - keep-alive
       Content-Length:
-      - 308
+      - '308'
       Content-Type:
       - application/json
-      Host:
-      - localhost:8080
+      Correlation-ID:
+      - 7e619a802a094742bc43c69b2654489b
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: POST
     uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/
   response:
     body:
-      string: '{"task":"/pulp/api/v3/tasks/01911db2-41d6-76dd-94ab-fdc1128b7392/"}'
+      string: '{"task":"/pulp/api/v3/tasks/0192614c-7c32-7752-8fd4-ba8702df0bed/"}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, POST, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '67'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 498599da471444aa83e03abfeaec51ed
+      - 7e619a802a094742bc43c69b2654489b
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:47 GMT
+      - Sun, 06 Oct 2024 10:07:35 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -152,36 +153,36 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - localhost:8080
+      - keep-alive
+      Correlation-ID:
+      - 7e619a802a094742bc43c69b2654489b
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/tasks/01911db2-41d6-76dd-94ab-fdc1128b7392/
+    uri: http://pulp.example.org/pulp/api/v3/tasks/0192614c-7c32-7752-8fd4-ba8702df0bed/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/tasks/01911db2-41d6-76dd-94ab-fdc1128b7392/","pulp_created":"2024-08-04T14:01:47.223185Z","pulp_last_updated":"2024-08-04T14:01:47.223200Z","state":"running","name":"pulpcore.app.tasks.base.general_create","logging_cid":"498599da471444aa83e03abfeaec51ed","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-08-04T14:01:47.248760Z","started_at":"2024-08-04T14:01:47.281894Z","finished_at":null,"error":null,"worker":"/pulp/api/v3/workers/01911db1-e2ae-71da-b637-43b763be573b/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["pdrn:01911db1-2858-7b72-b5fa-07ffea333219:distributions","shared:prn:core.domain:01911db1-2858-7b72-b5fa-07ffea333219"]}'
+      string: '{"pulp_href":"/pulp/api/v3/tasks/0192614c-7c32-7752-8fd4-ba8702df0bed/","pulp_created":"2024-10-06T10:07:35.474657Z","pulp_last_updated":"2024-10-06T10:07:35.474666Z","state":"running","name":"pulpcore.app.tasks.base.general_create","logging_cid":"7e619a802a094742bc43c69b2654489b","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-10-06T10:07:35.482840Z","started_at":"2024-10-06T10:07:35.515239Z","finished_at":null,"error":null,"worker":"/pulp/api/v3/workers/01925bfe-7511-7ba7-b9c6-f3d20168d69c/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["pdrn:01925bfd-cfdb-736f-a0b5-10c538713ad6:distributions","shared:prn:core.domain:01925bfd-cfdb-736f-a0b5-10c538713ad6"]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, PATCH, DELETE, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '758'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 719c9f0315e643ce891b9a88ef4aa90d
+      - 7e619a802a094742bc43c69b2654489b
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:47 GMT
+      - Sun, 06 Oct 2024 10:07:35 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -200,36 +201,36 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - localhost:8080
+      - keep-alive
+      Correlation-ID:
+      - 7e619a802a094742bc43c69b2654489b
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/tasks/01911db2-41d6-76dd-94ab-fdc1128b7392/
+    uri: http://pulp.example.org/pulp/api/v3/tasks/0192614c-7c32-7752-8fd4-ba8702df0bed/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/tasks/01911db2-41d6-76dd-94ab-fdc1128b7392/","pulp_created":"2024-08-04T14:01:47.223185Z","pulp_last_updated":"2024-08-04T14:01:47.223200Z","state":"completed","name":"pulpcore.app.tasks.base.general_create","logging_cid":"498599da471444aa83e03abfeaec51ed","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-08-04T14:01:47.248760Z","started_at":"2024-08-04T14:01:47.281894Z","finished_at":"2024-08-04T14:01:47.425239Z","error":null,"worker":"/pulp/api/v3/workers/01911db1-e2ae-71da-b637-43b763be573b/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":["/pulp/api/v3/distributions/rpm/rpm/01911db2-428a-7b71-8afd-51c1476e4965/"],"reserved_resources_record":["pdrn:01911db1-2858-7b72-b5fa-07ffea333219:distributions","shared:prn:core.domain:01911db1-2858-7b72-b5fa-07ffea333219"]}'
+      string: '{"pulp_href":"/pulp/api/v3/tasks/0192614c-7c32-7752-8fd4-ba8702df0bed/","pulp_created":"2024-10-06T10:07:35.474657Z","pulp_last_updated":"2024-10-06T10:07:35.474666Z","state":"completed","name":"pulpcore.app.tasks.base.general_create","logging_cid":"7e619a802a094742bc43c69b2654489b","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2024-10-06T10:07:35.482840Z","started_at":"2024-10-06T10:07:35.515239Z","finished_at":"2024-10-06T10:07:35.628271Z","error":null,"worker":"/pulp/api/v3/workers/01925bfe-7511-7ba7-b9c6-f3d20168d69c/","parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":["/pulp/api/v3/distributions/rpm/rpm/0192614c-7cc4-7393-a9b5-9564bc9636ec/"],"reserved_resources_record":["pdrn:01925bfd-cfdb-736f-a0b5-10c538713ad6:distributions","shared:prn:core.domain:01925bfd-cfdb-736f-a0b5-10c538713ad6"]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, PATCH, DELETE, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '859'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 1ab15a67dd20404d9d1b2e07798fefe1
+      - 7e619a802a094742bc43c69b2654489b
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:49 GMT
+      - Sun, 06 Oct 2024 10:07:36 GMT
       Referrer-Policy:
       - same-origin
       Server:
@@ -248,36 +249,36 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - localhost:8080
+      - keep-alive
+      Correlation-ID:
+      - 7e619a802a094742bc43c69b2654489b
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/01911db2-428a-7b71-8afd-51c1476e4965/
+    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/0192614c-7cc4-7393-a9b5-9564bc9636ec/
   response:
     body:
-      string: '{"pulp_href":"/pulp/api/v3/distributions/rpm/rpm/01911db2-428a-7b71-8afd-51c1476e4965/","pulp_created":"2024-08-04T14:01:47.402723Z","pulp_last_updated":"2024-08-04T14:01:47.402734Z","base_path":"test_rpm_base_path","base_url":"http://localhost:8080/pulp/content/test_rpm_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/01911db2-3081-78df-9192-1671daccdb67/","hidden":false,"pulp_labels":{},"name":"test_rpm_distribution","repository":null,"publication":"/pulp/api/v3/publications/rpm/rpm/01911db2-1c05-7736-9927-0e669574c1aa/","generate_repo_config":true}'
+      string: '{"pulp_href":"/pulp/api/v3/distributions/rpm/rpm/0192614c-7cc4-7393-a9b5-9564bc9636ec/","pulp_created":"2024-10-06T10:07:35.621148Z","pulp_last_updated":"2024-10-06T10:07:35.621159Z","base_path":"test_rpm_base_path","base_url":"http://localhost:8080/pulp/content/test_rpm_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/0192614c-6da4-7f7c-9947-23f4d8dc8445/","no_content_change_since":"2024-10-06T10:07:35.621159Z","hidden":false,"pulp_labels":{},"name":"test_rpm_distribution","repository":null,"publication":"/pulp/api/v3/publications/rpm/rpm/0192614c-663a-74ab-a81b-9906d511a973/","generate_repo_config":true}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
-      - '579'
+      - '635'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 91d86bfed36c4ef2bda9d0871287d743
+      - 7e619a802a094742bc43c69b2654489b
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:49 GMT
+      - Sun, 06 Oct 2024 10:07:36 GMT
       Referrer-Policy:
       - same-origin
       Server:

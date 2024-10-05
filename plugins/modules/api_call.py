@@ -52,6 +52,11 @@ RETURN = r"""
 
 from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpAnsibleModule
 
+try:
+    from pulp_glue.common.context import NotImplementedFake
+except ImportError:
+    NotImplementedFake = None
+
 
 def main():
     with PulpAnsibleModule(
@@ -66,10 +71,11 @@ def main():
         body = module.params["body"]
         if module.pulp_ctx.api.operations[operation_id][0].upper() not in ["GET", "HEAD"]:
             module.set_changed()
+        try:
+            response = module.pulp_ctx.call(operation_id, parameters=parameters, body=body)
+        except NotImplementedFake:
             if module.check_mode:
-                module.set_result("response", None)
-                return
-        response = module.pulp_ctx.call(operation_id, parameters=parameters, body=body)
+                response = None
         module.set_result("response", response)
 
 

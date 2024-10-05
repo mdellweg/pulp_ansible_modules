@@ -113,12 +113,11 @@ def main():
             repository_ctx = PulpFileRepositoryContext(
                 module.pulp_ctx, entity={"name": repository_name}
             )
-            repository = repository_ctx.entity
             # TODO check if version exists
             if version:
-                repository_version_href = repository["versions_href"] + f"{version}/"
+                repository_version_href = repository_ctx.entity["versions_href"] + f"{version}/"
             else:
-                repository_version_href = repository["latest_version_href"]
+                repository_version_href = repository_ctx.entity["latest_version_href"]
             natural_key = {"repository_version": repository_version_href}
         else:
             natural_key = {"repository_version": None}
