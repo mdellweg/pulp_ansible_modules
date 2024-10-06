@@ -4,36 +4,34 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - localhost:8080
+      - keep-alive
       User-Agent:
-      - Python-urllib/3.10
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/?limit=1&name=test_rpm_distribution
+    uri: http://pulp.example.org/pulp/api/v3/distributions/rpm/rpm/?name=test_rpm_distribution&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/rpm/rpm/01911db2-428a-7b71-8afd-51c1476e4965/","pulp_created":"2024-08-04T14:01:47.402723Z","pulp_last_updated":"2024-08-04T14:01:47.402734Z","base_path":"test_rpm_base_path","base_url":"http://localhost:8080/pulp/content/test_rpm_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/01911db2-3081-78df-9192-1671daccdb67/","hidden":false,"pulp_labels":{},"name":"test_rpm_distribution","repository":null,"publication":"/pulp/api/v3/publications/rpm/rpm/01911db2-1c05-7736-9927-0e669574c1aa/","generate_repo_config":true}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/distributions/rpm/rpm/0192614c-7cc4-7393-a9b5-9564bc9636ec/","pulp_created":"2024-10-06T10:07:35.621148Z","pulp_last_updated":"2024-10-06T10:07:35.621159Z","base_path":"test_rpm_base_path","base_url":"http://localhost:8080/pulp/content/test_rpm_base_path/","content_guard":"/pulp/api/v3/contentguards/certguard/x509/0192614c-6da4-7f7c-9947-23f4d8dc8445/","no_content_change_since":"2024-10-06T10:07:35.621159Z","hidden":false,"pulp_labels":{},"name":"test_rpm_distribution","repository":null,"publication":"/pulp/api/v3/publications/rpm/rpm/0192614c-663a-74ab-a81b-9906d511a973/","generate_repo_config":true}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, POST, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
-      - '631'
+      - '687'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 9ba232cd15d54779aa4d9d444a58362a
+      - f67062c6e61d49ae9fce593132f8579d
       Cross-Origin-Opener-Policy:
       - same-origin
       Date:
-      - Sun, 04 Aug 2024 14:01:50 GMT
+      - Sun, 06 Oct 2024 10:07:37 GMT
       Referrer-Policy:
       - same-origin
       Server:

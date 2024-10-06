@@ -4,42 +4,44 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - pulp3-sandbox-debian-testing
+      - keep-alive
       User-Agent:
-      - Python-urllib/3.9
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: https://pulp.example.org/pulp/api/v3/repositories/rpm/rpm/?limit=1&name=test_rpm_repository
+    uri: http://pulp.example.org/pulp/api/v3/repositories/rpm/rpm/?name=test_rpm_repository&offset=0&limit=1
   response:
     body:
-      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/rpm/rpm/4c19c574-e48a-4ba8-aa04-4e8fdb095da8/","pulp_created":"2021-07-22T17:24:07.991172Z","versions_href":"/pulp/api/v3/repositories/rpm/rpm/4c19c574-e48a-4ba8-aa04-4e8fdb095da8/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/rpm/rpm/4c19c574-e48a-4ba8-aa04-4e8fdb095da8/versions/1/","name":"test_rpm_repository","description":null,"retained_versions":null,"remote":null,"autopublish":false,"metadata_signing_service":null,"retain_package_versions":0,"metadata_checksum_type":null,"package_checksum_type":null,"gpgcheck":0,"repo_gpgcheck":0,"sqlite_metadata":false}]}'
+      string: '{"count":1,"next":null,"previous":null,"results":[{"pulp_href":"/pulp/api/v3/repositories/rpm/rpm/019261e0-be1e-74bc-8a0d-9d0f765a6fcd/","pulp_created":"2024-10-06T12:49:31.678520Z","pulp_last_updated":"2024-10-06T12:49:44.972614Z","versions_href":"/pulp/api/v3/repositories/rpm/rpm/019261e0-be1e-74bc-8a0d-9d0f765a6fcd/versions/","pulp_labels":{},"latest_version_href":"/pulp/api/v3/repositories/rpm/rpm/019261e0-be1e-74bc-8a0d-9d0f765a6fcd/versions/1/","name":"test_rpm_repository","description":null,"retain_repo_versions":null,"remote":null,"autopublish":false,"metadata_signing_service":null,"package_signing_service":null,"package_signing_fingerprint":"","retain_package_versions":0,"checksum_type":null,"metadata_checksum_type":null,"package_checksum_type":null,"gpgcheck":null,"repo_gpgcheck":null,"sqlite_metadata":false,"repo_config":{},"compression_type":null}]}'
     headers:
       Access-Control-Expose-Headers:
       - Correlation-ID
       Allow:
       - GET, POST, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
-      - '688'
+      - '873'
       Content-Type:
       - application/json
       Correlation-ID:
-      - ccb9697a3d684ffb9ff5d45ea0886d38
+      - a70cd4cb5d47431c8c67386ac805827f
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 22 Jul 2021 17:24:38 GMT
+      - Sun, 06 Oct 2024 12:49:53 GMT
+      Referrer-Policy:
+      - same-origin
       Server:
-      - nginx/1.18.0
-      Strict-Transport-Security:
-      - max-age=15768000
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
       X-Frame-Options:
-      - SAMEORIGIN
+      - DENY
     status:
       code: 200
       message: OK
@@ -48,16 +50,16 @@ interactions:
     headers:
       Accept:
       - application/json
+      Accept-Encoding:
+      - gzip, deflate
       Connection:
-      - close
-      Content-Type:
-      - application/json
-      Host:
-      - pulp3-sandbox-debian-testing
+      - keep-alive
+      Correlation-ID:
+      - a70cd4cb5d47431c8c67386ac805827f
       User-Agent:
-      - Python-urllib/3.9
+      - Squeezer/0.0.18-dev
     method: GET
-    uri: https://pulp.example.org/pulp/api/v3/publications/rpm/rpm/?limit=1&repository_version=%2Fpulp%2Fapi%2Fv3%2Frepositories%2Frpm%2Frpm%2F4c19c574-e48a-4ba8-aa04-4e8fdb095da8%2Fversions%2F1%2F
+    uri: http://pulp.example.org/pulp/api/v3/publications/rpm/rpm/?repository_version=%2Fpulp%2Fapi%2Fv3%2Frepositories%2Frpm%2Frpm%2F019261e0-be1e-74bc-8a0d-9d0f765a6fcd%2Fversions%2F1%2F&offset=0&limit=1
   response:
     body:
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
@@ -67,23 +69,27 @@ interactions:
       Allow:
       - GET, POST, HEAD, OPTIONS
       Connection:
-      - close
+      - keep-alive
       Content-Length:
       - '52'
       Content-Type:
       - application/json
       Correlation-ID:
-      - 22fc4cc960ab4ba28aad36e490f81e89
+      - a70cd4cb5d47431c8c67386ac805827f
+      Cross-Origin-Opener-Policy:
+      - same-origin
       Date:
-      - Thu, 22 Jul 2021 17:24:39 GMT
+      - Sun, 06 Oct 2024 12:49:53 GMT
+      Referrer-Policy:
+      - same-origin
       Server:
-      - nginx/1.18.0
-      Strict-Transport-Security:
-      - max-age=15768000
+      - nginx/1.22.1
       Vary:
-      - Accept, Cookie
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
       X-Frame-Options:
-      - SAMEORIGIN
+      - DENY
     status:
       code: 200
       message: OK

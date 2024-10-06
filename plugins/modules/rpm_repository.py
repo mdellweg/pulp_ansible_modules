@@ -47,8 +47,9 @@ options:
     type: int
     version_added: "0.0.16"
 extends_documentation_fragment:
-  - pulp.squeezer.pulp
   - pulp.squeezer.pulp.entity_state
+  - pulp.squeezer.pulp.glue
+  - pulp.squeezer.pulp
 author:
   - Jacob Floyd (@cognifloyd)
   - Aaron Sweeney (@ajsween)
@@ -100,16 +101,22 @@ RETURN = r"""
 """
 
 import json
+import traceback
 
 from ansible.module_utils.six import string_types
-from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
-    PulpEntityAnsibleModule,
-    PulpRpmRemote,
-    PulpRpmRepository,
-)
+from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpEntityAnsibleModule
+
+try:
+    from pulp_glue.rpm.context import PulpRpmRemoteContext, PulpRpmRepositoryContext
+
+    PULP_CLI_IMPORT_ERR = None
+except ImportError:
+    PULP_CLI_IMPORT_ERR = traceback.format_exc()
+    PulpRpmRepositoryContext = None
 
 DESIRED_KEYS = {
     "autopublish",
+    "description",
     "remote",
     "repo_config",
     "retain_package_versions",
@@ -119,6 +126,9 @@ DESIRED_KEYS = {
 
 def main():
     with PulpEntityAnsibleModule(
+        context_class=PulpRpmRepositoryContext,
+        entity_singular="repository",
+        entity_plural="repositories",
         argument_spec={
             "name": {},
             "description": {},
@@ -130,19 +140,18 @@ def main():
         },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
+        remote_name = module.params["remote"]
         natural_key = {"name": module.params["name"]}
         desired_attributes = {
             key: module.params[key] for key in DESIRED_KEYS if module.params[key] is not None
         }
 
-        if module.params["description"] is not None:
-            # In case of an empty string we nullify the description
-            desired_attributes["description"] = module.params["description"] or None
-
-        if module.params["remote"] is not None:
-            remote = PulpRpmRemote(module, {"name": module.params["remote"]})
-            remote.find(failsafe=False)
-            desired_attributes["remote"] = remote.href
+        if remote_name is not None:
+            if remote_name:
+                remote_ctx = PulpRpmRemoteContext(module.pulp_ctx, entity={"name": remote_name})
+                desired_attributes["remote"] = remote_ctx.pulp_href
+            else:
+                desired_attributes["remote"] = ""
 
         # Encode the repo_config unless its a string, then assume it is pre-formatted JSON
         if "repo_config" in desired_attributes and isinstance(
@@ -150,7 +159,7 @@ def main():
         ):
             desired_attributes["repo_config"] = json.loads(desired_attributes["repo_config"])
 
-        PulpRpmRepository(module, natural_key, desired_attributes).process()
+        module.process(natural_key, desired_attributes)
 
 
 if __name__ == "__main__":

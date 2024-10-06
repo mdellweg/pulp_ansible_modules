@@ -21,9 +21,10 @@ options:
       - on_demand
       - streamed
 extends_documentation_fragment:
-  - pulp.squeezer.pulp
-  - pulp.squeezer.pulp.entity_state
   - pulp.squeezer.pulp.remote
+  - pulp.squeezer.pulp.entity_state
+  - pulp.squeezer.pulp.glue
+  - pulp.squeezer.pulp
 author:
   - Jacob Floyd (@cognifloyd)
 """
@@ -69,47 +70,31 @@ RETURN = r"""
 """
 
 
-from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
-    PulpRemoteAnsibleModule,
-    PulpRpmRemote,
-)
+import traceback
+
+from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpRemoteAnsibleModule
+
+try:
+    from pulp_glue.rpm.context import PulpRpmRemoteContext
+
+    PULP_CLI_IMPORT_ERR = None
+except ImportError:
+    PULP_CLI_IMPORT_ERR = traceback.format_exc()
+    PulpRpmRemoteContext = None
 
 
 def main():
     with PulpRemoteAnsibleModule(
+        context_class=PulpRpmRemoteContext,
+        import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
         argument_spec={
             "policy": {"choices": ["immediate", "on_demand", "streamed"]},
         },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
         natural_key = {"name": module.params["name"]}
-        desired_attributes = {
-            key: module.params[key]
-            for key in ["url", "download_concurrency", "policy", "tls_validation"]
-            if module.params[key] is not None
-        }
 
-        # Nullifiable values
-        if module.params["remote_username"] is not None:
-            desired_attributes["username"] = module.params["remote_username"] or None
-        if module.params["remote_password"] is not None:
-            desired_attributes["password"] = module.params["remote_password"] or None
-        desired_attributes.update(
-            {
-                key: module.params[key] or None
-                for key in [
-                    "proxy_url",
-                    "proxy_username",
-                    "proxy_password",
-                    "ca_cert",
-                    "client_cert",
-                    "client_key",
-                ]
-                if module.params[key] is not None
-            }
-        )
-
-        PulpRpmRemote(module, natural_key, desired_attributes).process()
+        module.process(natural_key, {})
 
 
 if __name__ == "__main__":

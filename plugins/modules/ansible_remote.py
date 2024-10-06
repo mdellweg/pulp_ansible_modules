@@ -169,6 +169,7 @@ def main():
         },
         required_if=[("state", "present", ["name"]), ("state", "absent", ["name"])],
     ) as module:
+        # We need to trick this thing into polymorphism here...
         if module.params["content_type"] == "collection":
             module.context = PulpAnsibleCollectionRemoteContext(module.pulp_ctx)
         else:

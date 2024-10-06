@@ -52,8 +52,9 @@ options:
     required: false
     version_added: "0.0.16"
 extends_documentation_fragment:
-  - pulp.squeezer.pulp
   - pulp.squeezer.pulp.entity_state
+  - pulp.squeezer.pulp.glue
+  - pulp.squeezer.pulp
 author:
   - Jacob Floyd (@cognifloyd)
 """
@@ -110,16 +111,26 @@ RETURN = r"""
 """
 
 
-from ansible_collections.pulp.squeezer.plugins.module_utils.pulp import (
-    PulpContentGuard,
-    PulpEntityAnsibleModule,
-    PulpRpmDistribution,
-    PulpRpmRepository,
-)
+import traceback
+
+from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpEntityAnsibleModule
+
+try:
+    from pulp_glue.core.context import PulpContentGuardContext
+    from pulp_glue.rpm.context import PulpRpmDistributionContext, PulpRpmRepositoryContext
+
+    PULP_CLI_IMPORT_ERR = None
+except ImportError:
+    PULP_CLI_IMPORT_ERR = traceback.format_exc()
+    PulpRpmDistributionContext = None
 
 
 def main():
     with PulpEntityAnsibleModule(
+        context_class=PulpRpmDistributionContext,
+        entity_singular="distribution",
+        entity_plural="distribuions",
+        import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
         argument_spec={
             "name": {},
             "base_path": {},
@@ -145,30 +156,30 @@ def main():
                 "base_path",
                 "generate_repo_config",
                 "publication",
-                "repository",
                 "pulp_labels",
             ]
             if module.params[key] is not None
         }
 
-        # support switching between using publication and repository
-        if module.params["publication"] is not None:
-            desired_attributes["repository"] = None
-        elif repository_name is not None:
-            desired_attributes["publication"] = None
-            repository = PulpRpmRepository(module, {"name": repository_name})
-            repository.find(failsafe=False)
-            desired_attributes["repository"] = repository.href
+        if repository_name is not None:
+            if repository_name:
+                repository_ctx = PulpRpmRepositoryContext(
+                    module.pulp_ctx, entity={"name": repository_name}
+                )
+                desired_attributes["repository"] = repository_ctx.pulp_href
+            else:
+                desired_attributes["repository"] = ""
 
         if content_guard_name is not None:
             if content_guard_name:
-                content_guard = PulpContentGuard(module, {"name": content_guard_name})
-                content_guard.find(failsafe=False)
-                desired_attributes["content_guard"] = content_guard.href
+                content_guard_ctx = PulpContentGuardContext(
+                    module.pulp_ctx, entity={"name": content_guard_name}
+                )
+                desired_attributes["content_guard"] = content_guard_ctx.pulp_href
             else:
-                desired_attributes["content_guard"] = None
+                desired_attributes["content_guard"] = ""
 
-        PulpRpmDistribution(module, natural_key, desired_attributes).process()
+        module.process(natural_key, desired_attributes)
 
 
 if __name__ == "__main__":
