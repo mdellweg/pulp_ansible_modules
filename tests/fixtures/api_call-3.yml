@@ -1,0 +1,100 @@
+interactions:
+- request:
+    body: '{"description": "This is a repository for testing purpose."}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '60'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Squeezer/0.0.18-dev
+    method: PATCH
+    uri: http://pulp.example.org/pulp/api/v3/repositories/file/file/019469da-8f49-76d0-9021-41eaef3f831d/
+  response:
+    body:
+      string: '{"task":"/pulp/api/v3/tasks/019469da-9227-7d18-bb6d-2e9de6491108/"}'
+    headers:
+      Access-Control-Expose-Headers:
+      - Correlation-ID
+      Allow:
+      - GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '67'
+      Content-Type:
+      - application/json
+      Correlation-ID:
+      - 24b9eba7860e448ca1c074eb2d944390
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Date:
+      - Wed, 15 Jan 2025 12:05:19 GMT
+      Referrer-Policy:
+      - same-origin
+      Server:
+      - nginx/1.22.1
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+    status:
+      code: 202
+      message: Accepted
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Correlation-ID:
+      - 24b9eba7860e448ca1c074eb2d944390
+      User-Agent:
+      - Squeezer/0.0.18-dev
+    method: GET
+    uri: http://pulp.example.org/pulp/api/v3/tasks/019469da-9227-7d18-bb6d-2e9de6491108/
+  response:
+    body:
+      string: '{"pulp_href":"/pulp/api/v3/tasks/019469da-9227-7d18-bb6d-2e9de6491108/","prn":"prn:core.task:019469da-9227-7d18-bb6d-2e9de6491108","pulp_created":"2025-01-15T12:05:19.527741Z","pulp_last_updated":"2025-01-15T12:05:19.527752Z","state":"completed","name":"pulpcore.app.tasks.base.general_update","logging_cid":"24b9eba7860e448ca1c074eb2d944390","created_by":"/pulp/api/v3/users/1/","unblocked_at":"2025-01-15T12:05:19.534772Z","started_at":"2025-01-15T12:05:19.535327Z","finished_at":"2025-01-15T12:05:19.538602Z","error":null,"worker":null,"parent_task":null,"child_tasks":[],"task_group":null,"progress_reports":[],"created_resources":[],"reserved_resources_record":["prn:file.filerepository:019469da-8f49-76d0-9021-41eaef3f831d","shared:prn:core.domain:019464c8-76fe-7e95-8cca-95f89a4b4718"]}'
+    headers:
+      Access-Control-Expose-Headers:
+      - Correlation-ID
+      Allow:
+      - GET, PATCH, DELETE, HEAD, OPTIONS
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '793'
+      Content-Type:
+      - application/json
+      Correlation-ID:
+      - 24b9eba7860e448ca1c074eb2d944390
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Date:
+      - Wed, 15 Jan 2025 12:05:19 GMT
+      Referrer-Policy:
+      - same-origin
+      Server:
+      - nginx/1.22.1
+      Vary:
+      - Accept
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,8 +1,8 @@
 ---
-- hosts: localhost
+- hosts: "localhost"
   gather_facts: false
   vars_files:
-    - vars/server.yaml
+    - "vars/server.yaml"
   module_defaults: &pulp_module_defaults
     pulp.squeezer.api_call: &pulp_connection_details
       pulp_url: "{{ pulp_url }}"
@@ -13,59 +13,97 @@
       <<: *pulp_connection_details
   tasks:
     - pulp.squeezer.file_repository:
-        name: test_api_call
-        state: absent
-    - name: Clean openapi cache
+        name: "test_api_call"
+        state: "absent"
+    - name: "Clean openapi cache"
       file:
         path: "{{ lookup('env', 'XDG_CACHE_HOME') | default('~/.cache') }}/squeezer"
-        state: absent
+        state: "absent"
 
-- hosts: tests
+- hosts: "tests"
   gather_facts: false
   vars_files:
-    - vars/server.yaml
+    - "vars/server.yaml"
   module_defaults:
     <<: *pulp_module_defaults
   tasks:
-    - name: Call status_read api
+    - name: "Call status_read api"
       pulp.squeezer.api_call:
-        operation_id: status_read
-      register: result
-    - name: Assert on status response
+        operation_id: "status_read"
+      register: "result"
+    - name: "Assert on status response"
       assert:
         that:
-          - result.response.database_connection.connected == True
-    - name: Create a repository
+          - "result.response.database_connection.connected == True"
+    - name: "Create a repository"
       pulp.squeezer.api_call:
-        operation_id: repositories_file_file_create
+        operation_id: "repositories_file_file_create"
         body:
-          name: test_api_call
-      register: result
-    - name: Extract repository href
+          name: "test_api_call"
+      register: "result"
+    - name: "Extract repository href"
       set_fact:
         repository_href: "{{ result.response.pulp_href }}"
-      when: not ansible_check_mode
-    - name: Search for the repository
+      when: "not ansible_check_mode"
+    - name: "Search for the repository"
       pulp.squeezer.api_call:
-        operation_id: repositories_file_file_list
+        operation_id: "repositories_file_file_list"
         parameters:
-          name: test_api_call
-      register: result
-    - name: Compare results
+          name: "test_api_call"
+      register: "result"
+    - name: "Compare results"
       assert:
         that:
-          - (not ansible_check_mode) or (result.response.results[0].pulp_href == repository_href)
-          - result.response.results[0].name == "test_api_call"
-      when: not ansible_check_mode
+          - "(not ansible_check_mode) or (result.response.results[0].pulp_href == repository_href)"
+          - "result.response.results[0].name == 'test_api_call'"
+      when: "not ansible_check_mode"
+    - name: "Extract repository href"
+      set_fact:
+        repository_href: "{{ result.response.results[0].pulp_href }}"
+      when: "ansible_check_mode"
+    - name: "Update its description"
+      pulp.squeezer.api_call:
+        operation_id: "repositories_file_file_partial_update"
+        parameters:
+          file_file_repository_href: "{{ repository_href }}"
+        json_body: |
+          {"description": "This is a repository for testing purpose."}
+    - name: "Read the repository"
+      pulp.squeezer.api_call:
+        operation_id: "repositories_file_file_read"
+        parameters:
+          file_file_repository_href: "{{ repository_href }}"
+      register: "result"
+    - name: "Assert the description was updated."
+      assert:
+        that:
+          - "result.response.description == 'This is a repository for testing purpose.'"
+    - name: "Remove its description"
+      pulp.squeezer.api_call:
+        operation_id: "repositories_file_file_partial_update"
+        parameters:
+          file_file_repository_href: "{{ repository_href }}"
+        json_body: |
+          {"description": null}
+    - name: "Read the repository"
+      pulp.squeezer.api_call:
+        operation_id: "repositories_file_file_read"
+        parameters:
+          file_file_repository_href: "{{ repository_href }}"
+      register: "result"
+    - name: "Assert the description was removed."
+      assert:
+        that:
+          - "result.response.description == None"
 
-- hosts: localhost
+- hosts: "localhost"
   gather_facts: false
   vars_files:
-    - vars/server.yaml
+    - "vars/server.yaml"
   module_defaults:
     <<: *pulp_module_defaults
   tasks:
     - pulp.squeezer.file_repository:
-        name: test_api_call
-        state: absent
+        name: "test_api_call"
+        state: "absent"
 ...
