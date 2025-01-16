@@ -16,7 +16,7 @@ try:
     from pulp_glue.common.context import PulpContext, PulpException, PulpNoWait
     from pulp_glue.common.openapi import BasicAuthProvider
 
-    GLUE_VERSION_SPEC = ">=0.29.2,<0.30"
+    GLUE_VERSION_SPEC = ">=0.29.2,<0.31"
     if not SpecifierSet(GLUE_VERSION_SPEC, prereleases=True).contains(pulp_glue_version):
         raise ImportError(
             f"Installed 'pulp-glue' version '{pulp_glue_version}' is not in '{GLUE_VERSION_SPEC}'."
