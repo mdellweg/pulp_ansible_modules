@@ -129,7 +129,7 @@ def main():
     with PulpEntityAnsibleModule(
         context_class=PulpRpmDistributionContext,
         entity_singular="distribution",
-        entity_plural="distribuions",
+        entity_plural="distributions",
         import_errors=[("pulp-glue", PULP_CLI_IMPORT_ERR)],
         argument_spec={
             "name": {},
