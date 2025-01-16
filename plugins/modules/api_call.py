@@ -7,9 +7,9 @@
 DOCUMENTATION = r"""
 ---
 module: api_call
-short_description: TBD
+short_description: "Make generic API calls to Pulp"
 description:
-  - "TBD"
+  - "This allows performing api calls to Pulp by specifying their operation id."
 options:
   operation_id:
     description: "ID of the openapi operation to perform."
@@ -20,8 +20,18 @@ options:
     type: dict
     required: false
   body:
-    description: "JSON representation of the body to send in the request (only POST, PUT and PATCH requests.)"
+    description: |
+      Representation of the body to send in the request
+      (only POST, PUT and PATCH requests)
+      Mutually exclusive with O(json_body).
     type: dict
+    required: false
+  json_body:
+    description: |
+      JSON representation of the body to send in the request
+      (only POST, PUT and PATCH requests)
+      Mutually exclusive with O(body).
+    type: str
     required: false
 extends_documentation_fragment:
   - pulp.squeezer.pulp.glue
@@ -50,12 +60,15 @@ RETURN = r"""
 """
 
 
+import json
+
 from ansible_collections.pulp.squeezer.plugins.module_utils.pulp_glue import PulpAnsibleModule
 
 try:
-    from pulp_glue.common.context import NotImplementedFake
+    from pulp_glue.common.context import NotImplementedFake, PreprocessedEntityDefinition
 except ImportError:
     NotImplementedFake = None
+    PreprocessedEntityDefinition = None
 
 
 def main():
@@ -64,11 +77,17 @@ def main():
             "operation_id": {"required": True},
             "parameters": {"type": "dict"},
             "body": {"type": "dict"},
+            "json_body": {},
         },
+        mutually_exclusive=[["body", "json_body"]],
     ) as module:
         operation_id = module.params["operation_id"]
         parameters = module.params["parameters"]
-        body = module.params["body"]
+        json_body = module.params["json_body"]
+        if json_body is None:
+            body = module.params["body"]
+        else:
+            body = PreprocessedEntityDefinition(json.loads(json_body))
         if module.pulp_ctx.api.operations[operation_id][0].upper() not in ["GET", "HEAD"]:
             module.set_changed()
         try:
